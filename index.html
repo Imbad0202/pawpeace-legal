@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PawPeace — 陪伴毛孩走過最溫柔的旅程</title>
   <meta name="description" content="PawPeace 寵物安寧照護 App，陪伴飼主與毛孩走過生命最後一段旅程。QoL 追蹤、用藥管理、AI 血檢分析、照護日記。">
-  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="icon" type="image/png" href="icon.png">
   <style>
     * {
       margin: 0;
@@ -33,13 +33,15 @@
       width: 120px;
       height: 120px;
       border-radius: 28px;
-      background: linear-gradient(145deg, #E8A87C, #C97B84);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 56px;
       margin: 0 auto 28px;
       box-shadow: 0 8px 32px rgba(232, 168, 124, 0.3);
+      overflow: hidden;
+    }
+
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero h1 {
@@ -181,7 +183,6 @@
       .app-icon {
         width: 96px;
         height: 96px;
-        font-size: 44px;
         border-radius: 22px;
       }
     }
@@ -191,7 +192,7 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="app-icon">🐾</div>
+    <div class="app-icon"><img src="icon.png" alt="PawPeace App Icon"></div>
     <h1>PawPeace</h1>
     <p class="tagline">陪伴毛孩走過最溫柔的旅程</p>
     <p class="subtitle">專為寵物安寧照護設計的溫暖紀錄工具</p>
