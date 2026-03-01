@@ -24,7 +24,7 @@
     /* Hero */
     .hero {
       text-align: center;
-      padding: 80px 24px 60px;
+      padding: 80px 24px 48px;
       max-width: 640px;
       margin: 0 auto;
     }
@@ -66,11 +66,48 @@
       margin: 0 auto;
     }
 
+    /* Story */
+    .story {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+    }
+
+    .story p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .story .highlight {
+      color: #3a3a3a;
+      font-weight: 500;
+    }
+
+    .divider {
+      text-align: center;
+      padding: 8px 0 48px;
+      color: #E8A87C;
+      font-size: 20px;
+      letter-spacing: 12px;
+    }
+
     /* Features */
     .features {
       max-width: 640px;
       margin: 0 auto;
-      padding: 20px 24px 60px;
+      padding: 0 24px 48px;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #E8A87C;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .features-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
@@ -105,6 +142,19 @@
       font-size: 14px;
       color: #888;
       line-height: 1.5;
+    }
+
+    /* Dedication */
+    .dedication {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px 24px 48px;
+    }
+
+    .dedication p {
+      font-size: 15px;
+      color: #C97B84;
     }
 
     /* CTA */
@@ -149,7 +199,7 @@
       text-decoration: underline;
     }
 
-    footer .divider {
+    footer .footer-divider {
       color: #ddd;
       margin: 0 12px;
     }
@@ -174,10 +224,17 @@
         font-size: 18px;
       }
 
+      .story {
+        padding: 0 20px 40px;
+      }
+
       .features {
+        padding: 0 20px 40px;
+      }
+
+      .features-grid {
         grid-template-columns: 1fr;
         gap: 16px;
-        padding: 10px 20px 48px;
       }
 
       .app-icon {
@@ -198,28 +255,65 @@
     <p class="subtitle">專為寵物安寧照護設計的溫暖紀錄工具</p>
   </section>
 
+  <!-- Story -->
+  <section class="story">
+    <p>這個 App，獻給我的貓——<span class="highlight">花花</span>。</p>
+
+    <p>花花是一隻三花貓。某天，她突然出現在我上班的地方，從此陪伴我度過每一個加班的晚上、每一個快撐不下去的時刻。沒有人知道她幾歲，附近的鄰居只說，已經看了她十八年。</p>
+
+    <p>直到某天，我驚覺她的身形越來越消瘦。帶她看了醫生，才知道是腎衰竭第三期，還有嚴重貧血。即便如此，她看到我，還是會興奮地起身朝我走來。</p>
+
+    <p>從那天起，開始了照顧腎貓的不歸路。</p>
+
+    <p>有照顧過腎貓的飼主一定懂——不能斷的皮下點滴，不能停的腎利磷、Rapos、鉀寶、補血藥。嚴重的時候要住院、要輸血。心在滴血，錢也在燒。直到離開的那一天。</p>
+
+    <p><span class="highlight">花花離開一年了。</span>我把那段日子裡最深的感受，做成了這個 App。</p>
+
+    <p>PawPeace 的初衷很簡單：讓每一個正在全力照顧毛孩的你，有一個工具幫你好好記錄這段路程。同時，也提醒你——<span class="highlight">要記得照顧自己</span>。</p>
+  </section>
+
+  <div class="divider">···</div>
+
   <!-- Features -->
   <section class="features">
-    <div class="feature-card">
-      <div class="feature-icon">📊</div>
-      <h3>生活品質追蹤</h3>
-      <p>每日記錄毛孩狀態，用溫柔的方式關注變化趨勢</p>
+    <h2>功能</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>生活品質追蹤</h3>
+        <p>每日記錄毛孩狀態，用溫柔的方式關注變化趨勢</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💊</div>
+        <h3>用藥管理</h3>
+        <p>藥物排程與提醒，不再錯過每一次給藥時間</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>AI 血檢解讀</h3>
+        <p>拍照上傳報告，AI 幫你解讀指數變化</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏥</div>
+        <h3>就診與費用紀錄</h3>
+        <p>記錄診斷與治療，追蹤照護開支</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌈</div>
+        <h3>回憶時光軸</h3>
+        <p>串聯照片與重要時刻，編織生命故事</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💛</div>
+        <h3>照護者情緒支持</h3>
+        <p>引導日記、自我照顧提醒，照護者也需要被照顧</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">💊</div>
-      <h3>用藥管理</h3>
-      <p>藥物排程與提醒，不再錯過每一次給藥時間</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔬</div>
-      <h3>AI 血檢解讀</h3>
-      <p>拍照上傳報告，AI 幫你解讀指數變化</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📝</div>
-      <h3>照護日記</h3>
-      <p>用文字和照片留下與毛孩相處的珍貴回憶</p>
-    </div>
+  </section>
+
+  <!-- Dedication -->
+  <section class="dedication">
+    <p>獻給花花，以及每一隻被深深愛過的毛孩。</p>
   </section>
 
   <!-- CTA -->
@@ -234,7 +328,7 @@
   <footer>
     <div>
       <a href="privacy-policy.html">隱私權政策</a>
-      <span class="divider">|</span>
+      <span class="footer-divider">|</span>
       <a href="mailto:support@pawpeace.app">聯絡我們</a>
     </div>
     <p class="copyright">&copy; 2026 PawPeace. All rights reserved.</p>
