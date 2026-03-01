@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PawPeace — 陪伴毛孩走過最溫柔的旅程</title>
-  <meta name="description" content="PawPeace 寵物安寧照護 App，陪伴飼主與毛孩走過生命最後一段旅程。QoL 追蹤、用藥管理、AI 血檢解讀、照護日記。">
+  <meta name="description" content="PawPeace 寵物安寧照護 App，陪伴飼主與毛孩走過生命最後一段旅程。QoL 追蹤、體重監測、用藥管理、AI 血檢解讀、8 大 AI 照護功能、照護日記。">
   <link rel="icon" type="image/png" href="icon.png">
   <style>
     * {
@@ -78,7 +78,7 @@
       height: 88px;
       border-radius: 50%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: 60% 12%;
       margin: 0 auto 20px;
       display: block;
       box-shadow: 0 4px 16px rgba(201, 123, 132, 0.25);
@@ -154,6 +154,78 @@
       font-size: 14px;
       color: #888;
       line-height: 1.5;
+    }
+
+    /* AI Features */
+    .ai-features {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+    }
+
+    .ai-features h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #85B79D;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .ai-features .section-desc {
+      text-align: center;
+      font-size: 15px;
+      color: #999;
+      margin-bottom: 28px;
+    }
+
+    .ai-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .ai-list li {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .ai-list .ai-emoji {
+      font-size: 22px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .ai-list .ai-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 2px;
+    }
+
+    .ai-list .ai-desc {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.4;
+    }
+
+    /* Subscription hint */
+    .plan-hint {
+      text-align: center;
+      font-size: 14px;
+      color: #bbb;
+      margin-top: 24px;
+    }
+
+    .plan-hint span {
+      color: #E8A87C;
+      font-weight: 500;
     }
 
     /* Dedication */
@@ -254,6 +326,15 @@
         height: 96px;
         border-radius: 22px;
       }
+
+      .ai-features {
+        padding: 0 20px 40px;
+      }
+
+      .ai-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -287,29 +368,44 @@
 
   <div class="divider">···</div>
 
-  <!-- Features -->
+  <!-- Features: Core -->
   <section class="features">
-    <h2>功能</h2>
+    <h2>照護紀錄</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">📊</div>
         <h3>生活品質追蹤</h3>
-        <p>每日記錄毛孩狀態，用溫柔的方式關注變化趨勢</p>
+        <p>每日 7 項 QoL 評估（HHHHHMM 量表），用溫柔的方式關注變化趨勢</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚖️</div>
+        <h3>體重監測</h3>
+        <p>每日體重記錄與趨勢折線圖，掌握毛孩營養狀態</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">💊</div>
         <h3>用藥管理</h3>
-        <p>藥物排程與提醒，不再錯過每一次給藥時間</p>
+        <p>藥物排程與自訂提醒時間，不再錯過每一次給藥</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔬</div>
         <h3>AI 血檢解讀</h3>
-        <p>拍照上傳報告，AI 幫你解讀指數變化</p>
+        <p>拍照上傳報告，AI 幫你解讀指數變化與趨勢</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🏥</div>
-        <h3>就診與費用紀錄</h3>
-        <p>記錄診斷與治療，追蹤照護開支</p>
+        <h3>就醫紀錄</h3>
+        <p>記錄診斷、治療與附件，追蹤回診時間</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>費用記帳</h3>
+        <p>醫療與照護開支一目瞭然</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>照護知識庫</h3>
+        <p>15 篇居家照護與觀察指南，全部經獸醫文獻交叉驗證</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🌈</div>
@@ -317,11 +413,83 @@
         <p>串聯照片與重要時刻，編織生命故事</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">💛</div>
-        <h3>照護者情緒支持</h3>
-        <p>引導日記、自我照顧提醒，照護者也需要被照顧</p>
+        <div class="feature-icon">📝</div>
+        <h3>心情日記</h3>
+        <p>引導式寫作提示，記錄你和毛孩的每一天</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>預立醫療指示</h3>
+        <p>提前規劃毛孩的照護方向，在平靜時做好準備</p>
       </div>
     </div>
+  </section>
+
+  <div class="divider">···</div>
+
+  <!-- Features: AI -->
+  <section class="ai-features">
+    <h2>8 大 AI 照護功能</h2>
+    <p class="section-desc">由 AI 陪你一起照顧毛孩，也照顧你自己</p>
+    <ul class="ai-list">
+      <li>
+        <span class="ai-emoji">🩺</span>
+        <div>
+          <div class="ai-name">AI 症狀評估</div>
+          <div class="ai-desc">觀察每日記錄，提供舒適照護建議</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">💊</span>
+        <div>
+          <div class="ai-name">AI 用藥交互檢查</div>
+          <div class="ai-desc">藥物安全參考，標記關注程度</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">📋</span>
+        <div>
+          <div class="ai-name">AI 照護週報</div>
+          <div class="ai-desc">每週摘要，值得開心的事和需要留意的</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">🥗</span>
+        <div>
+          <div class="ai-name">AI 飲食建議</div>
+          <div class="ai-desc">根據診斷和狀況提供營養方向</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">🏥</span>
+        <div>
+          <div class="ai-name">AI 就醫小幫手</div>
+          <div class="ai-desc">幫你準備看診問題和觀察重點</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">✨</span>
+        <div>
+          <div class="ai-name">AI 日記輔助</div>
+          <div class="ai-desc">溫柔的寫作靈感與反思提示</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">💛</span>
+        <div>
+          <div class="ai-name">AI 情緒陪伴</div>
+          <div class="ai-desc">有什麼心事，AI 夥伴陪你聊聊</div>
+        </div>
+      </li>
+      <li>
+        <span class="ai-emoji">🕊️</span>
+        <div>
+          <div class="ai-name">AI 紀念文生成</div>
+          <div class="ai-desc">用 3 種風格為毛孩寫一篇紀念文</div>
+        </div>
+      </li>
+    </ul>
+    <p class="plan-hint">免費試用 2 次 · 訂閱方案：<span>小家庭</span>（1-2 隻）/ <span>大家庭</span>（3 隻以上）</p>
   </section>
 
   <!-- Dedication -->
