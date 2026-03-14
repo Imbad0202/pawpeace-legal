@@ -3,521 +3,816 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PawPeace — 陪伴毛孩走過最溫柔的旅程</title>
-  <meta name="description" content="PawPeace 寵物安寧照護 App，陪伴飼主與毛孩走過生命最後一段旅程。QoL 追蹤、體重監測、用藥管理、AI 血檢解讀、8 大 AI 照護功能、照護日記。">
-  <link rel="icon" type="image/png" href="icon.png">
+  <title>PawPeace — 陪伴毛孩走過每一天</title>
+  <meta name="description" content="PawPeace 寵物安寧照護 App，陪伴飼主與毛孩走過生命中最珍貴的時光。QoL 追蹤、AI 血檢分析、用藥管理、情緒陪伴。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
   <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.08);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --radius-lg: 24px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-      background: #FFF8F0;
-      color: #3a3a3a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* Hero */
+    /* ===== Background Orbs ===== */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(160px);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-orb-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(232, 168, 124, 0.12);
+      top: -200px;
+      right: -200px;
+      animation: orb-drift-1 25s ease-in-out infinite;
+    }
+    .bg-orb-2 {
+      width: 500px;
+      height: 500px;
+      background: rgba(133, 183, 157, 0.10);
+      bottom: -100px;
+      left: -200px;
+      animation: orb-drift-2 30s ease-in-out infinite;
+    }
+    .bg-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: rgba(201, 123, 132, 0.08);
+      top: 50%;
+      left: 50%;
+      animation: orb-drift-3 20s ease-in-out infinite;
+    }
+
+    @keyframes orb-drift-1 {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(-40px, 30px); }
+      66% { transform: translate(25px, -20px); }
+    }
+    @keyframes orb-drift-2 {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(30px, -40px); }
+      66% { transform: translate(-20px, 25px); }
+    }
+    @keyframes orb-drift-3 {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(-25px, -35px); }
+      66% { transform: translate(35px, 15px); }
+    }
+
+    /* ===== Sticky Nav ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(255, 248, 240, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .nav-logo-icon {
+      font-size: 24px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .nav-cta {
+      background: var(--primary);
+      color: var(--white) !important;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+      padding: 4px;
+    }
+
+    /* ===== Content wrapper ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Hero ===== */
     .hero {
       text-align: center;
-      padding: 80px 24px 48px;
-      max-width: 640px;
+      padding: 140px 24px 80px;
+      max-width: 720px;
       margin: 0 auto;
     }
-
-    .app-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 28px;
-      margin: 0 auto 28px;
-      box-shadow: 0 8px 32px rgba(232, 168, 124, 0.3);
-      overflow: hidden;
-    }
-
-    .app-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      font-weight: 700;
-      color: #3a3a3a;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .hero .tagline {
-      font-size: 20px;
-      color: #85B79D;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .hero .subtitle {
-      font-size: 16px;
-      color: #999;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    /* Story */
-    .story {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 0 24px 48px;
-    }
-
-    .story-avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center 30%;
-      margin: 0 auto 20px;
-      display: block;
-      box-shadow: 0 4px 16px rgba(201, 123, 132, 0.25);
-      border: 3px solid #fff;
-    }
-
-    .story p {
-      font-size: 16px;
-      margin-bottom: 20px;
-      color: #666;
-    }
-
-    .story .highlight {
-      color: #3a3a3a;
-      font-weight: 500;
-    }
-
-    .divider {
-      text-align: center;
-      padding: 8px 0 48px;
-      color: #E8A87C;
-      font-size: 20px;
-      letter-spacing: 12px;
-    }
-
-    /* Features */
-    .features {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 24px 48px;
-    }
-
-    .features h2 {
-      text-align: center;
-      font-size: 24px;
-      color: #E8A87C;
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 13px;
       font-weight: 600;
-      margin-bottom: 32px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
     }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .hero h1 {
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
     }
-
-    .feature-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px 24px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-      transition: transform 0.2s ease;
+    .hero h1 span {
+      color: var(--primary);
     }
-
-    .feature-card:hover {
+    .hero .subtitle {
+      font-size: clamp(16px, 3vw, 20px);
+      color: var(--text-light);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 28px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(232, 168, 124, 0.3);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(232, 168, 124, 0.4);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      color: var(--text);
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 28px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: 2px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
       transform: translateY(-2px);
     }
+    .scroll-hint {
+      margin-top: 48px;
+      color: var(--text-light);
+      font-size: 24px;
+      animation: bounce 2s ease-in-out infinite;
+    }
 
-    .feature-icon {
-      font-size: 36px;
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ===== Section shared ===== */
+    section {
+      padding: 80px 24px;
+    }
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 16px;
       margin-bottom: 12px;
     }
-
-    .feature-card h3 {
+    .section-title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .section-desc {
       font-size: 16px;
-      font-weight: 600;
-      color: #3a3a3a;
-      margin-bottom: 6px;
+      color: var(--text-light);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 48px;
     }
-
-    .feature-card p {
-      font-size: 14px;
-      color: #888;
-      line-height: 1.5;
-    }
-
-    /* AI Features */
-    .ai-features {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 0 24px 48px;
-    }
-
-    .ai-features h2 {
+    .section-center {
       text-align: center;
-      font-size: 24px;
-      color: #85B79D;
-      font-weight: 600;
+    }
+    .section-center .section-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== Features Grid (3 columns) ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid transparent;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
       margin-bottom: 8px;
     }
-
-    .ai-features .section-desc {
-      text-align: center;
-      font-size: 15px;
-      color: #999;
-      margin-bottom: 28px;
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
     }
 
-    .ai-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    /* ===== How It Works (Steps) ===== */
+    .steps-section {
+      background: var(--white);
     }
-
-    .ai-list li {
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    .steps-row {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
+      justify-content: center;
+      gap: 24px;
+    }
+    .step {
+      text-align: center;
+      flex: 1;
+      max-width: 280px;
+    }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .step-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+      font-size: 28px;
+      padding-top: 16px;
+      flex-shrink: 0;
+    }
+    .step h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
     }
 
-    .ai-list .ai-emoji {
-      font-size: 22px;
+    /* ===== Everything You Need (6 features) ===== */
+    .everything-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .everything-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .everything-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .everything-emoji {
+      font-size: 28px;
       flex-shrink: 0;
       line-height: 1;
       margin-top: 2px;
     }
-
-    .ai-list .ai-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: #3a3a3a;
-      margin-bottom: 2px;
-    }
-
-    .ai-list .ai-desc {
-      font-size: 13px;
-      color: #999;
-      line-height: 1.4;
-    }
-
-    /* Subscription hint */
-    .plan-hint {
-      text-align: center;
-      font-size: 14px;
-      color: #bbb;
-      margin-top: 24px;
-    }
-
-    .plan-hint span {
-      color: #E8A87C;
-      font-weight: 500;
-    }
-
-    /* Dedication */
-    .dedication {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 16px 24px 48px;
-    }
-
-    .dedication p {
+    .everything-card h4 {
       font-size: 15px;
-      color: #C97B84;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .everything-card p {
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
     }
 
-    /* CTA */
-    .cta {
+    /* ===== CTA ===== */
+    .cta-section {
       text-align: center;
-      padding: 0 24px 60px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--white) 100%);
     }
-
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+    }
     .app-store-badge {
       display: inline-block;
-      transition: opacity 0.2s ease;
+      transition: all 0.2s;
     }
-
     .app-store-badge:hover {
       opacity: 0.85;
+      transform: translateY(-2px);
     }
-
     .app-store-badge img {
       height: 54px;
     }
-
     .cta-hint {
       font-size: 13px;
-      color: #bbb;
-      margin-top: 12px;
+      color: var(--text-light);
+      margin-top: 16px;
     }
 
-    /* Footer */
+    /* ===== Footer ===== */
     footer {
       text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid #f0e8df;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
     }
-
-    footer a {
-      color: #E8A87C;
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: var(--text-light);
       text-decoration: none;
       font-size: 14px;
+      transition: color 0.2s;
     }
-
-    footer a:hover {
-      text-decoration: underline;
+    .footer-links a:hover {
+      color: var(--primary);
     }
-
-    footer .footer-divider {
-      color: #ddd;
-      margin: 0 12px;
+    .footer-divider {
+      color: var(--border);
+      font-size: 14px;
     }
-
-    footer .copyright {
+    .footer-copy {
       font-size: 12px;
-      color: #bbb;
-      margin-top: 12px;
+      color: var(--text-light);
     }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .hero {
-        padding: 56px 20px 40px;
-      }
+    /* ===== Back to Top ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 999;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(232, 168, 124, 0.3);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
 
-      .hero h1 {
-        font-size: 32px;
-      }
+    /* ===== Reveal Animations ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
-      .hero .tagline {
-        font-size: 18px;
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 248, 240, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 16px 24px;
+        gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
       }
-
-      .story {
-        padding: 0 20px 40px;
+      .nav-links.open {
+        display: flex;
       }
-
-      .features {
-        padding: 0 20px 40px;
+      .nav-toggle {
+        display: block;
       }
-
       .features-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
-
-      .app-icon {
-        width: 96px;
-        height: 96px;
-        border-radius: 22px;
+      .steps-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
       }
-
-      .ai-features {
-        padding: 0 20px 40px;
+      .step-arrow {
+        transform: rotate(90deg);
+        padding: 0;
       }
-
-      .ai-list {
+      .everything-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
+        gap: 12px;
+      }
+      .hero {
+        padding: 120px 20px 60px;
+      }
+      section {
+        padding: 60px 20px;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .everything-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="app-icon"><img src="icon.png" alt="PawPeace App Icon"></div>
-    <h1>PawPeace</h1>
-    <p class="tagline">陪伴毛孩走過最溫柔的旅程</p>
-    <p class="subtitle">專為寵物安寧照護設計的溫暖紀錄工具</p>
-  </section>
+  <!-- Background Orbs -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
 
-  <!-- Story -->
-  <section class="story">
-    <img src="huahua.jpg" alt="花花" class="story-avatar">
-    <p>這個 App，獻給我已經在喵星旅行的貓——<span class="highlight">花花</span>。</p>
-
-    <p>花花是一隻三花貓。平常，在我上班的地方出沒，沒有人知道她幾歲，附近的鄰居只說，已經看了她十八年。</p>
-
-    <p>花花是隻很淡定的貓，淡定到讓人覺得見過不少大風大浪。天氣好的時候可以看到她在樹蔭下或廣場上曬太陽，下雨或天冷時，會在車棚和機車上看到她。我和花花的緣分，也從一開始的不期而遇，變成了互相信賴的默契。</p>
-
-    <p>但時間終究是所有生物躲不了的宿命。花花開始日漸消瘦，連站起來都顯吃力，但她每次看到我，仍然會起身朝我走過來，只是走得越來越慢，越來越短。</p>
-
-    <p>帶去看了醫生，腎衰竭第三期加上貧血，雖然盡力把花花從鬼門關前拉回來，但醫生也預告了花花只剩下 3 個月的壽命。</p>
-
-    <p>照顧過腎貓的飼主一定懂那種日子——每天的皮下點滴，腎利磷、Rapos、鉀寶、補血藥，一樣都不能停。嚴重的時候住院、輸血。那段期間，你不知道還可以跟花花相處的日子還有多久，只知道每一天都過得無比珍貴。</p>
-
-    <p><span class="highlight">花花離開一年了。</span></p>
-
-    <p>那段日子裡，我常常想，要是能好好記錄這些回憶就好了。花花曾經那麼努力地活著，記下來，才能讓花花繼續活在心裡。</p>
-
-    <p>於是我把這個想法做成了 PawPeace。給你，和你的毛孩。</p>
-  </section>
-
-  <div class="divider">···</div>
-
-  <!-- Features: Core -->
-  <section class="features">
-    <h2>照護紀錄</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>生活品質追蹤</h3>
-        <p>每日 7 項 QoL 評估（HHHHHMM 量表），用溫柔的方式關注變化趨勢</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚖️</div>
-        <h3>體重監測</h3>
-        <p>每日體重記錄與趨勢折線圖，掌握毛孩營養狀態</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💊</div>
-        <h3>用藥管理</h3>
-        <p>藥物排程與自訂提醒時間，不再錯過每一次給藥</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔬</div>
-        <h3>AI 血檢解讀</h3>
-        <p>拍照上傳報告，AI 幫你解讀指數變化與趨勢</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏥</div>
-        <h3>就醫紀錄</h3>
-        <p>記錄診斷、治療與附件，追蹤回診時間</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💰</div>
-        <h3>費用記帳</h3>
-        <p>醫療與照護開支一目瞭然</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📚</div>
-        <h3>照護知識庫</h3>
-        <p>15 篇居家照護與觀察指南，全部經獸醫文獻交叉驗證</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🌈</div>
-        <h3>回憶時光軸</h3>
-        <p>串聯照片與重要時刻，編織生命故事</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📝</div>
-        <h3>心情日記</h3>
-        <p>引導式寫作提示，記錄你和毛孩的每一天</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📋</div>
-        <h3>預立醫療指示</h3>
-        <p>提前規劃毛孩的照護方向，在平靜時做好準備</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider">···</div>
-
-  <!-- Features: AI -->
-  <section class="ai-features">
-    <h2>8 大 AI 照護功能</h2>
-    <p class="section-desc">由 AI 陪你一起照顧毛孩，也照顧你自己</p>
-    <ul class="ai-list">
-      <li>
-        <span class="ai-emoji">🩺</span>
-        <div>
-          <div class="ai-name">AI 症狀評估</div>
-          <div class="ai-desc">觀察每日記錄，提供舒適照護建議</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">💊</span>
-        <div>
-          <div class="ai-name">AI 用藥交互檢查</div>
-          <div class="ai-desc">藥物安全參考，標記關注程度</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">📋</span>
-        <div>
-          <div class="ai-name">AI 照護週報</div>
-          <div class="ai-desc">每週摘要，值得開心的事和需要留意的</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">🥗</span>
-        <div>
-          <div class="ai-name">AI 飲食建議</div>
-          <div class="ai-desc">根據診斷和狀況提供營養方向</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">🏥</span>
-        <div>
-          <div class="ai-name">AI 就醫小幫手</div>
-          <div class="ai-desc">幫你準備看診問題和觀察重點</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">✨</span>
-        <div>
-          <div class="ai-name">AI 日記輔助</div>
-          <div class="ai-desc">溫柔的寫作靈感與反思提示</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">💛</span>
-        <div>
-          <div class="ai-name">AI 情緒陪伴</div>
-          <div class="ai-desc">有什麼心事，AI 夥伴陪你聊聊</div>
-        </div>
-      </li>
-      <li>
-        <span class="ai-emoji">🕊️</span>
-        <div>
-          <div class="ai-name">AI 紀念文生成</div>
-          <div class="ai-desc">用 3 種風格為毛孩寫一篇紀念文</div>
-        </div>
-      </li>
-    </ul>
-    <p class="plan-hint">免費試用 2 次 · 訂閱方案：<span>小家庭</span>（1-2 隻）/ <span>大家庭</span>（3 隻以上）</p>
-  </section>
-
-  <!-- Dedication -->
-  <section class="dedication">
-    <p>獻給花花，以及每一隻被深深愛過的毛孩。</p>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <a class="app-store-badge" href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener">
-      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+  <!-- Sticky Nav -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-icon">🐾</span>
+      <span>PawPeace</span>
     </a>
-    <p class="cta-hint">支援 iOS 16.0 以上</p>
-  </section>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">使用手冊</a></li>
+      <li><a href="pricing.html">方案</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">下載 App</a></li>
+    </ul>
+  </nav>
 
-  <!-- Footer -->
-  <footer>
-    <div>
-      <a href="privacy-policy.html">隱私權政策</a>
-      <span class="footer-divider">|</span>
-      <a href="mailto:support@pawpeace.app">聯絡我們</a>
-    </div>
-    <p class="copyright">&copy; 2026 PawPeace. All rights reserved.</p>
-  </footer>
+  <div class="content">
 
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">寵物安寧照護 App</div>
+      <h1><span>PawPeace</span><br>陪伴毛孩走過每一天</h1>
+      <p class="subtitle">專為寵物安寧照護設計的溫暖紀錄工具。記錄生活品質、管理用藥、AI 智慧分析，在最珍貴的日子裡，讓愛被好好記住。</p>
+      <div class="hero-buttons">
+        <a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="btn-primary">
+          下載 App
+        </a>
+        <a href="manual.html" class="btn-secondary">
+          📖 使用手冊
+        </a>
+      </div>
+      <div class="scroll-hint">↓</div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section-center">
+      <div class="section-inner">
+        <span class="section-label">核心功能</span>
+        <h2 class="section-title">為毛孩的每一天，做最溫柔的記錄</h2>
+        <p class="section-desc">從生活品質追蹤到 AI 智慧分析，PawPeace 讓照護變得更有方向、更安心。</p>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon">📊</div>
+            <h3>生活品質追蹤</h3>
+            <p>依據 HHHHHMM 量表的 7 項指標進行每日 QoL 評分，搭配趨勢圖表，用溫柔的方式關注毛孩的狀態變化。</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon">🤖</div>
+            <h3>AI 智慧分析</h3>
+            <p>血檢報告 AI 解讀、X 光觀察描述、飲食建議、症狀評估，讓 AI 成為你的照護夥伴。</p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon">💛</div>
+            <h3>心理支持</h3>
+            <p>AI 情緒陪伴對話、心情日記引導寫作、自我照顧提醒，照顧毛孩的同時，也照顧你自己。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="steps-section section-center">
+      <div class="section-inner">
+        <span class="section-label">簡單三步驟</span>
+        <h2 class="section-title">開始使用 PawPeace</h2>
+        <p class="section-desc">不需要複雜的設定，三步就能開始記錄毛孩的每一天。</p>
+        <div class="steps-row">
+          <div class="step reveal">
+            <div class="step-number">1</div>
+            <h3>新增毛孩</h3>
+            <p>輸入毛孩的名字、物種、品種，上傳一張可愛的大頭照，建立專屬檔案。</p>
+          </div>
+          <div class="step-arrow reveal reveal-delay-1">→</div>
+          <div class="step reveal reveal-delay-1">
+            <div class="step-number">2</div>
+            <h3>記錄每一天</h3>
+            <p>每天花幾分鐘記錄 QoL 評分、體重、用藥、備註，讓照護有跡可循。</p>
+          </div>
+          <div class="step-arrow reveal reveal-delay-2">→</div>
+          <div class="step reveal reveal-delay-2">
+            <div class="step-number">3</div>
+            <h3>AI 陪你做決定</h3>
+            <p>上傳血檢報告讓 AI 解讀，查看週報摘要，在重要時刻有數據做後盾。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Everything You Need -->
+    <section class="section-center">
+      <div class="section-inner">
+        <span class="section-label">完整功能</span>
+        <h2 class="section-title">你需要的，我們都準備好了</h2>
+        <p class="section-desc">從日常記錄到專業分析，PawPeace 涵蓋寵物安寧照護的每個面向。</p>
+        <div class="everything-grid">
+          <div class="everything-card reveal">
+            <span class="everything-emoji">💊</span>
+            <div>
+              <h4>用藥管理</h4>
+              <p>藥物排程、自訂提醒時間、庫存追蹤、AI 用藥交互檢查，不再錯過每一次給藥。</p>
+            </div>
+          </div>
+          <div class="everything-card reveal reveal-delay-1">
+            <span class="everything-emoji">🔬</span>
+            <div>
+              <h4>血檢分析</h4>
+              <p>手動輸入或拍照 OCR 上傳血檢報告，AI 幫你解讀指數變化與歷史趨勢。</p>
+            </div>
+          </div>
+          <div class="everything-card reveal reveal-delay-2">
+            <span class="everything-emoji">🩻</span>
+            <div>
+              <h4>X 光觀察</h4>
+              <p>上傳 X 光影像，AI Vision 提供觀察描述，幫助你記錄影像發現。</p>
+            </div>
+          </div>
+          <div class="everything-card reveal">
+            <span class="everything-emoji">🏥</span>
+            <div>
+              <h4>就醫紀錄</h4>
+              <p>記錄回診時間、診斷內容、附件。AI 就醫小幫手幫你準備看診問題。</p>
+            </div>
+          </div>
+          <div class="everything-card reveal reveal-delay-1">
+            <span class="everything-emoji">💰</span>
+            <div>
+              <h4>記帳管理</h4>
+              <p>分類記錄醫療與照護花費，圓餅圖與月報表讓開支一目瞭然。</p>
+            </div>
+          </div>
+          <div class="everything-card reveal reveal-delay-2">
+            <span class="everything-emoji">📚</span>
+            <div>
+              <h4>照護知識庫</h4>
+              <p>22 篇經獸醫文獻交叉驗證的專業文章，涵蓋居家照護、觀察指南、營養建議。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>下載 PawPeace</h2>
+      <p>讓每一天的陪伴，都被溫柔地記住。</p>
+      <a class="app-store-badge" href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+      <p class="cta-hint">支援 iOS 16.0 以上 ・ 免費下載，可選訂閱方案</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">隱私權政策</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">服務條款</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">訂閱方案</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">退款政策</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI 免責聲明</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+  <script>
+    // Sticky nav scroll effect
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Back to top
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.textContent = '☰';
+      });
+    });
+
+    // Reveal on scroll (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>

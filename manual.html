@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用手冊 — PawPeace</title>
+  <meta name="description" content="PawPeace 完整使用手冊。了解如何使用 QoL 追蹤、用藥管理、AI 血檢分析、心理支持等功能。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Background Orbs */
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      background: rgba(255,248,240,0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    /* Content */
+    .content { position: relative; z-index: 1; }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      padding: 140px 24px 60px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .page-header h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .page-header p {
+      font-size: 16px;
+      color: var(--text-light);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* TOC */
+    .toc {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+    .toc-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .toc-card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+    .toc-list {
+      list-style: none;
+      columns: 2;
+      column-gap: 24px;
+    }
+    .toc-list li {
+      break-inside: avoid;
+      margin-bottom: 8px;
+    }
+    .toc-list a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      transition: color 0.2s;
+    }
+    .toc-list a:hover {
+      color: var(--primary);
+    }
+    .toc-num {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Manual Content */
+    .manual {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .manual-section {
+      margin-bottom: 48px;
+    }
+    .manual-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+      scroll-margin-top: 80px;
+    }
+    .manual-section h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin: 24px 0 12px;
+    }
+    .manual-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 16px 0 8px;
+    }
+    .manual-section p {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+    .manual-section ul, .manual-section ol {
+      margin: 8px 0 16px 20px;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .manual-section li {
+      margin-bottom: 6px;
+      line-height: 1.7;
+    }
+    .tip-box {
+      background: var(--white);
+      border-left: 4px solid var(--secondary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .tip-box strong {
+      color: var(--secondary);
+    }
+    .warning-box {
+      background: #FFF5F5;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .warning-box strong {
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    /* Back to top */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .toc-list { columns: 1; }
+      .page-header { padding: 120px 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">使用手冊</a></li>
+      <li><a href="pricing.html">方案</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">下載 App</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>📖 使用手冊</h1>
+      <p>完整了解 PawPeace 的每一項功能，讓你和毛孩的每一天都被溫柔記錄。</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <div class="toc-card">
+        <h2>目錄</h2>
+        <ol class="toc-list">
+          <li><a href="#sec1"><span class="toc-num">1</span>開始使用</a></li>
+          <li><a href="#sec2"><span class="toc-num">2</span>首頁毛孩草原</a></li>
+          <li><a href="#sec3"><span class="toc-num">3</span>每日照護日記</a></li>
+          <li><a href="#sec4"><span class="toc-num">4</span>用藥管理</a></li>
+          <li><a href="#sec5"><span class="toc-num">5</span>AI 分析功能</a></li>
+          <li><a href="#sec6"><span class="toc-num">6</span>就醫紀錄</a></li>
+          <li><a href="#sec7"><span class="toc-num">7</span>記帳功能</a></li>
+          <li><a href="#sec8"><span class="toc-num">8</span>更多功能</a></li>
+          <li><a href="#sec9"><span class="toc-num">9</span>訂閱方案</a></li>
+          <li><a href="#sec10"><span class="toc-num">10</span>常見問題 FAQ</a></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Manual Content -->
+    <div class="manual">
+
+      <!-- Section 1 -->
+      <div class="manual-section" id="sec1">
+        <h2>1. 開始使用</h2>
+
+        <h3>1.1 下載安裝</h3>
+        <p>PawPeace 目前支援 iOS 16.0 以上版本。你可以在 App Store 搜尋「PawPeace」或直接點擊<a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" style="color:var(--primary)">此連結</a>下載。</p>
+
+        <h3>1.2 註冊與登入</h3>
+        <p>PawPeace 提供三種登入方式：</p>
+        <ul>
+          <li><strong>Email 註冊</strong>：輸入電子信箱和密碼即可建立帳號。系統會寄送驗證信，請前往信箱點擊驗證連結完成註冊。</li>
+          <li><strong>Apple 登入</strong>：點擊「以 Apple 登入」按鈕，使用 Face ID 或 Touch ID 快速驗證。你可以選擇隱藏電子信箱。</li>
+          <li><strong>Google 登入</strong>：點擊「以 Google 登入」按鈕，選擇你的 Google 帳號完成驗證。</li>
+        </ul>
+
+        <div class="tip-box">
+          <strong>小提示：</strong>使用 Apple 登入時，即使選擇「隱藏我的電子郵件」，你仍然可以正常使用所有功能。Apple 會自動轉發通知信件到你的真實信箱。
+        </div>
+
+        <h3>1.3 首次使用</h3>
+        <p>首次登入後，系統會引導你閱讀醫療免責聲明。確認後即可進入主畫面，開始新增你的第一隻毛孩。</p>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="manual-section" id="sec2">
+        <h2>2. 首頁毛孩草原</h2>
+
+        <h3>2.1 毛孩草原</h3>
+        <p>首頁是一片溫馨的草原場景，你的毛孩會以可愛的動畫角色出現在草原上。點擊毛孩即可進入該毛孩的詳細頁面。草原會隨著你新增的毛孩數量而越來越熱鬧。</p>
+
+        <h3>2.2 新增毛孩</h3>
+        <p>點擊首頁右上角的「+」按鈕，填寫以下資訊：</p>
+        <ul>
+          <li><strong>名字</strong>（必填）：毛孩的名字</li>
+          <li><strong>物種</strong>（必填）：貓、狗或其他</li>
+          <li><strong>品種</strong>（選填）：如三花貓、柴犬等</li>
+          <li><strong>性別</strong>（選填）：公、母、已結紮</li>
+          <li><strong>生日</strong>（選填）：如果不確定可以填大概的日期</li>
+          <li><strong>體重</strong>（選填）：目前體重（公斤）</li>
+          <li><strong>照片</strong>（選填）：從相簿選擇或直接拍照</li>
+          <li><strong>診斷</strong>（選填）：如腎臟病、腫瘤等，供 AI 分析參考</li>
+        </ul>
+
+        <h3>2.3 毛孩檔案</h3>
+        <p>點擊毛孩後進入詳細頁面，可以看到：</p>
+        <ul>
+          <li>毛孩的基本資訊與大頭照</li>
+          <li>今日 QoL 評分摘要</li>
+          <li>最近 7 天的 QoL 趨勢折線圖</li>
+          <li>體重趨勢圖</li>
+          <li>今日用藥狀態</li>
+          <li>快速進入各功能的按鈕</li>
+        </ul>
+
+        <h3>2.4 今日摘要</h3>
+        <p>在毛孩詳細頁面，你可以一覽毛孩今天的照護狀態，包含 QoL 分數、是否已完成今日記錄、用藥進度等。這讓你每天打開 App 就能快速掌握現況。</p>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="manual-section" id="sec3">
+        <h2>3. 每日照護日記</h2>
+
+        <h3>3.1 QoL 生活品質評分</h3>
+        <p>PawPeace 使用改良版的 HHHHHMM 量表，從 7 個面向評估毛孩的生活品質，每項 0-10 分：</p>
+        <ol>
+          <li><strong>疼痛 (Pain)</strong> — 毛孩今天看起來舒服嗎？（權重 ×2）</li>
+          <li><strong>食慾 (Appetite)</strong> — 今天吃得好嗎？（權重 ×1.5）</li>
+          <li><strong>飲水 (Hydration)</strong> — 喝水量正常嗎？（權重 ×1.5）</li>
+          <li><strong>行動力 (Mobility)</strong> — 可以自己走動嗎？（權重 ×1）</li>
+          <li><strong>快樂程度 (Happiness)</strong> — 還會撒嬌或玩耍嗎？（權重 ×1.5）</li>
+          <li><strong>清潔衛生 (Hygiene)</strong> — 身體乾淨嗎？（權重 ×1）</li>
+          <li><strong>整體感受 (Overall)</strong> — 你覺得牠今天好不好？（權重 ×1.5）</li>
+        </ol>
+        <p>系統會自動計算加權平均分數，顯示為 0-10 分。長期的趨勢圖讓你看見變化的方向。</p>
+
+        <div class="tip-box">
+          <strong>小提示：</strong>QoL 評分沒有絕對的「好」或「不好」，重要的是觀察趨勢。如果分數持續下降，系統會用溫柔的方式提醒你可以和獸醫討論。
+        </div>
+
+        <h3>3.2 體重記錄</h3>
+        <p>在每日記錄中可以輸入今天的體重（公斤），系統會自動繪製體重趨勢圖。對於安寧照護中的毛孩，體重變化是重要的健康指標。</p>
+
+        <h3>3.3 備註與語音備忘</h3>
+        <p>每日記錄可以附加文字備註，也可以錄製語音備忘。有時候打字太慢或太忙，按住錄音鍵說幾句話就好。</p>
+
+        <h3>3.4 AI 症狀評估</h3>
+        <p>完成每日記錄後，你可以請 AI 根據今天的 QoL 評分和備註，提供觀察提示和舒適照護建議。AI 會用溫柔的語氣，告訴你哪些地方值得留意，以及可以嘗試的照護方式。</p>
+
+        <div class="warning-box">
+          <strong>重要提醒：</strong>AI 症狀評估僅供參考，不構成獸醫診斷。如果毛孩有異常狀況，請務必諮詢獸醫師。
+        </div>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="manual-section" id="sec4">
+        <h2>4. 用藥管理</h2>
+
+        <h3>4.1 新增藥物</h3>
+        <p>在「用藥管理」頁面點擊「+」新增藥物：</p>
+        <ul>
+          <li><strong>藥物名稱</strong>：如「腎利磷」、「Rapos」</li>
+          <li><strong>劑量</strong>：每次用量，如「1 顆」、「0.5ml」</li>
+          <li><strong>頻率</strong>：每日幾次</li>
+          <li><strong>備註</strong>：特殊注意事項，如「飯後服用」、「需冷藏」</li>
+          <li><strong>提醒時間</strong>：自訂每次提醒的時間，支援多個時段</li>
+          <li><strong>庫存數量</strong>（選填）：藥物剩餘數量</li>
+        </ul>
+
+        <h3>4.2 給藥記錄</h3>
+        <p>每次給藥時，點擊藥物卡片上的「已給藥」按鈕即可記錄。系統會記錄給藥時間，並在今日用藥進度中顯示完成狀態。若某次未給藥，也可以選擇「跳過」並填寫原因。</p>
+
+        <h3>4.3 庫存追蹤</h3>
+        <p>如果你設定了庫存數量，每次記錄給藥時庫存會自動扣減。當庫存低於設定的提醒數量時，系統會通知你需要補充藥物。</p>
+
+        <h3>4.4 AI 用藥交互檢查</h3>
+        <p>當你新增多種藥物時，可以使用「AI 用藥交互檢查」功能。AI 會分析你目前所有藥物之間的潛在交互作用，並以關注程度分級標示。</p>
+
+        <div class="warning-box">
+          <strong>重要提醒：</strong>AI 用藥交互檢查僅供參考，不構成用藥建議。任何藥物調整請務必先諮詢獸醫師。
+        </div>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="manual-section" id="sec5">
+        <h2>5. AI 分析功能</h2>
+
+        <h3>5.1 血檢報告</h3>
+
+        <h4>手動輸入</h4>
+        <p>在「血檢報告」頁面點擊「+」新增報告，選擇「手動輸入」模式。你可以逐一輸入各項檢驗數值（如 BUN、Creatinine、HCT 等），系統提供常見項目的快速選擇。</p>
+
+        <h4>OCR 拍照上傳</h4>
+        <p>選擇「拍照上傳」模式，將手機對準紙本報告拍照。AI 會自動辨識報告上的數值並填入。辨識完成後請檢查數值是否正確，必要時手動修正。</p>
+
+        <h4>PDF 上傳</h4>
+        <p>如果你有電子版報告（PDF），可以從檔案中選取上傳。AI 同樣會嘗試辨識並擷取數值。</p>
+
+        <h4>AI 分析</h4>
+        <p>報告建立後，點擊「AI 分析」按鈕。AI 會根據毛孩的物種和年齡，解讀各項指數的意義、指出異常值，並提供觀察建議。分析結果會以易懂的語言呈現，不使用過於專業或令人擔憂的詞彙。</p>
+
+        <h4>趨勢圖</h4>
+        <p>當你累積多次血檢報告後，可以查看各項數值的歷史趨勢圖。選擇想觀察的項目（如 BUN、Creatinine），即可看到折線圖顯示的變化趨勢。</p>
+
+        <h3>5.2 X 光觀察</h3>
+
+        <h4>拍攝或上傳</h4>
+        <p>在血檢報告頁面中，你也可以上傳 X 光影像。可以直接拍攝燈箱上的 X 光片，或從相簿選擇已有的影像。</p>
+
+        <h4>AI 觀察描述</h4>
+        <p>上傳後點擊「AI 觀察」，AI 會描述影像中的觀察發現。這項功能使用 AI Vision 技術，可以幫助你在回診時與獸醫討論影像內容。</p>
+
+        <div class="warning-box">
+          <strong>重要提醒：</strong>AI X 光觀察僅為描述性質，不構成影像診斷。正式的影像判讀必須由獸醫師或獸醫影像專科醫師進行。
+        </div>
+      </div>
+
+      <!-- Section 6 -->
+      <div class="manual-section" id="sec6">
+        <h2>6. 就醫紀錄</h2>
+
+        <h3>6.1 新增回診紀錄</h3>
+        <p>在「就醫紀錄」頁面點擊「+」新增：</p>
+        <ul>
+          <li><strong>就診日期</strong>：回診的日期與時間</li>
+          <li><strong>醫院/獸醫</strong>：就診的醫療機構或醫師名稱</li>
+          <li><strong>診斷</strong>：獸醫的診斷或觀察</li>
+          <li><strong>治療內容</strong>：進行了什麼治療或處置</li>
+          <li><strong>備註</strong>：獸醫的叮嚀或後續注意事項</li>
+          <li><strong>下次回診</strong>（選填）：預約的下次回診日期</li>
+          <li><strong>費用</strong>（選填）：本次就醫費用</li>
+        </ul>
+
+        <h3>6.2 附件</h3>
+        <p>每筆就醫紀錄可以附加照片（如處方箋、診斷報告）。這些附件會安全儲存在雲端，隨時可以查閱。</p>
+
+        <h3>6.3 AI 就醫小幫手</h3>
+        <p>在回診前，你可以使用「AI 就醫小幫手」功能。AI 會根據毛孩最近的 QoL 記錄、用藥情況和血檢數據，幫你整理：</p>
+        <ul>
+          <li>值得向獸醫提出的問題清單</li>
+          <li>最近的觀察重點摘要</li>
+          <li>數據變化趨勢</li>
+        </ul>
+        <p>這樣你就不用擔心看診時忘記要問什麼了。</p>
+      </div>
+
+      <!-- Section 7 -->
+      <div class="manual-section" id="sec7">
+        <h2>7. 記帳功能</h2>
+
+        <h3>7.1 新增支出記錄</h3>
+        <p>在「記帳」頁面點擊「+」新增支出：</p>
+        <ul>
+          <li><strong>金額</strong>：花費金額（新台幣）</li>
+          <li><strong>類別</strong>：醫療、藥物、飼料、用品、其他</li>
+          <li><strong>日期</strong>：消費日期</li>
+          <li><strong>備註</strong>（選填）：補充說明</li>
+        </ul>
+
+        <h3>7.2 圖表分析</h3>
+        <p>記帳頁面提供視覺化圖表：</p>
+        <ul>
+          <li><strong>分類圓餅圖</strong>：各類別支出占比</li>
+          <li><strong>月度趨勢</strong>：每月總花費趨勢</li>
+          <li><strong>累計統計</strong>：總花費金額</li>
+        </ul>
+        <p>這些數據可以幫助你了解照護成本，也方便日後整理報帳。</p>
+      </div>
+
+      <!-- Section 8 -->
+      <div class="manual-section" id="sec8">
+        <h2>8. 更多功能</h2>
+
+        <h3>8.1 照護知識庫</h3>
+        <p>PawPeace 內建 22 篇專業照護文章，涵蓋三大主題：</p>
+        <ul>
+          <li><strong>居家照護</strong>：皮下點滴教學、營養管理、環境布置等</li>
+          <li><strong>觀察指南</strong>：疼痛辨識、生命徵象觀察、緊急狀況判斷等</li>
+          <li><strong>營養與飲食</strong>：腎臟病飲食、食慾不振對策、營養補充等</li>
+        </ul>
+        <p>所有文章皆經獸醫文獻交叉驗證，提供實用且溫暖的照護指引。</p>
+
+        <h3>8.2 回憶時光軸</h3>
+        <p>時光軸串聯了毛孩生命中的重要時刻——首次領養、第一次看醫生、旅行、紀念日等。你可以新增事件、附加照片，讓毛孩的生命故事完整呈現。</p>
+
+        <h3>8.3 心理支持</h3>
+        <p>照顧安寧期的毛孩是一段辛苦的旅程。PawPeace 的心理支持功能包含：</p>
+        <ul>
+          <li><strong>心情日記</strong>：引導式寫作提示，幫助你整理情緒</li>
+          <li><strong>自我照顧提醒</strong>：溫柔提醒你也要好好照顧自己</li>
+          <li><strong>AI 日記輔助</strong>：提供寫作靈感與反思提示</li>
+        </ul>
+
+        <h3>8.4 AI 陪伴聊天</h3>
+        <p>有時候你只是需要有人聽你說說話。AI 陪伴聊天像一個溫柔的朋友，陪你聊聊照護的心情、分享你的擔憂或快樂的小事。它不會急著給建議，而是先聽你說。</p>
+
+        <div class="tip-box">
+          <strong>小提示：</strong>AI 陪伴聊天提供的是一般性情緒支持，不是心理諮商。如果你有嚴重的情緒困擾，建議撥打生命線 1925 或尋求專業心理師的協助。
+        </div>
+
+        <h3>8.5 預立醫療指示</h3>
+        <p>在毛孩狀態還穩定的時候，提前思考並記錄未來的照護方向：</p>
+        <ul>
+          <li>是否接受急救措施</li>
+          <li>對積極治療 vs 舒適照護的偏好</li>
+          <li>安樂死的考量與底線</li>
+          <li>後事安排的偏好</li>
+        </ul>
+        <p>在平靜的時候做好準備，當困難的時刻來臨時，你可以更從容地面對。</p>
+
+        <h3>8.6 設定</h3>
+        <p>在「更多」頁面可以找到設定功能：</p>
+        <ul>
+          <li><strong>通知設定</strong>：管理用藥提醒、日記提醒等通知</li>
+          <li><strong>帳號管理</strong>：修改密碼、管理 Passkey</li>
+          <li><strong>訂閱管理</strong>：查看目前方案、升級或管理訂閱</li>
+          <li><strong>資料匯出</strong>：將照護紀錄匯出為 PDF</li>
+          <li><strong>刪除帳號</strong>：永久刪除帳號和所有資料</li>
+        </ul>
+      </div>
+
+      <!-- Section 9 -->
+      <div class="manual-section" id="sec9">
+        <h2>9. 訂閱方案</h2>
+        <p>PawPeace 提供免費方案與兩種付費訂閱方案，詳細內容請參閱<a href="pricing.html" style="color:var(--primary);font-weight:600">方案與定價頁面</a>。</p>
+        <p>基本照護功能（QoL 追蹤、用藥管理、就醫紀錄等）完全免費。AI 分析功能提供免費試用次數，如需更多使用量可以選擇付費方案。</p>
+      </div>
+
+      <!-- Section 10 -->
+      <div class="manual-section" id="sec10">
+        <h2>10. 常見問題 FAQ</h2>
+
+        <h3>Q: PawPeace 需要付費嗎？</h3>
+        <p>基本功能完全免費，包含 QoL 追蹤、用藥管理、就醫紀錄、記帳、知識庫等。AI 分析功能提供免費試用（AI 分析 2 次、OCR 2 次），需要更多可訂閱付費方案。</p>
+
+        <h3>Q: 我的資料安全嗎？</h3>
+        <p>所有資料使用 HTTPS 加密傳輸，儲存在安全的雲端伺服器。資料庫使用行級安全策略（RLS），你只能存取自己的資料。AI 分析時只傳送寵物照護數據，不傳送任何飼主個人資訊。</p>
+
+        <h3>Q: AI 分析的結果可以信任嗎？</h3>
+        <p>AI 分析結果僅供參考，不構成獸醫診斷或醫療建議。AI 可以幫助你理解數據、發現趨勢、準備就醫問題，但所有醫療決策都應該諮詢專業獸醫師。</p>
+
+        <h3>Q: 可以記錄多隻毛孩嗎？</h3>
+        <p>免費方案可記錄 1 隻毛孩。小家庭方案（NT$120/月）可記錄 2 隻，大家庭方案（NT$350/月）可記錄無限隻毛孩。</p>
+
+        <h3>Q: 如何取消訂閱？</h3>
+        <p>訂閱透過 Apple App Store 管理。前往 iPhone「設定」→ 你的名字 → 「訂閱項目」→ 找到 PawPeace → 取消訂閱。取消後，已付費的期間仍可繼續使用。</p>
+
+        <h3>Q: 毛孩已經離開了，我可以保留紀錄嗎？</h3>
+        <p>當然可以。你可以在毛孩的檔案中設定「彩虹橋日期」，毛孩的所有紀錄會永久保留在你的帳號中。你也可以使用「AI 紀念文」功能，為毛孩寫一篇紀念文。</p>
+
+        <h3>Q: 如何刪除帳號？</h3>
+        <p>前往「更多」→「設定」→「刪除帳號」。確認後，你的所有資料將在 30 天內完全移除，無法恢復。</p>
+
+        <h3>Q: 遇到問題怎麼辦？</h3>
+        <p>請寄信至 <a href="mailto:pawpeace0225@gmail.com" style="color:var(--primary)">pawpeace0225@gmail.com</a>，我們會盡快回覆。</p>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">隱私權政策</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">服務條款</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">訂閱方案</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">退款政策</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI 免責聲明</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>

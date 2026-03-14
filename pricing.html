@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方案與定價 — PawPeace</title>
+  <meta name="description" content="PawPeace 訂閱方案與定價。免費方案、小家庭方案、大家庭方案，滿足不同照護需求。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    .content { position: relative; z-index: 1; }
+
+    .page-header { text-align: center; padding: 140px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .page-header h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-header p { font-size: 16px; color: var(--text-light); max-width: 520px; margin: 0 auto; }
+
+    /* Pricing Cards */
+    .pricing-grid {
+      max-width: 1080px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .pricing-card.featured {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .pricing-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .pricing-card .plan-desc {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .pricing-card .price {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .pricing-card .price span {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+    .pricing-card .price-annual {
+      font-size: 14px;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .pricing-card .price-free {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 4px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      font-size: 14px;
+      color: var(--text);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pricing-features li:last-child {
+      border-bottom: none;
+    }
+    .check { color: var(--secondary); font-weight: 700; font-size: 16px; }
+    .cross { color: #D4D4D4; font-weight: 700; font-size: 16px; }
+
+    .pricing-btn {
+      display: block;
+      text-align: center;
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .pricing-btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .pricing-btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .pricing-btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .pricing-btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Comparison Table */
+    .comparison {
+      max-width: 1080px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+    .comparison h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table th {
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 600;
+    }
+    .comparison-table th:first-child {
+      text-align: left;
+    }
+    .comparison-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+    .comparison-table tr:hover td {
+      background: rgba(232,168,124,0.04);
+    }
+
+    /* FAQ */
+    .pricing-faq {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+    .pricing-faq h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .faq-item p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center; padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .comparison-table { font-size: 12px; }
+      .comparison-table th, .comparison-table td { padding: 10px 8px; }
+      .page-header { padding: 120px 20px 48px; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-card:last-child { grid-column: span 2; max-width: 50%; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">使用手冊</a></li>
+      <li><a href="pricing.html">方案</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">下載 App</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>方案與定價</h1>
+      <p>選擇最適合你的方案，基本照護功能完全免費。</p>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="pricing-grid">
+
+      <!-- Free -->
+      <div class="pricing-card">
+        <h3>免費方案</h3>
+        <p class="plan-desc">開始你的照護旅程</p>
+        <div class="price-free">免費</div>
+        <p class="price-annual" style="color:var(--text-light)">永久免費，不需信用卡</p>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 1 隻毛孩</li>
+          <li><span class="check">✓</span> AI 分析試用 2 次</li>
+          <li><span class="check">✓</span> OCR 辨識試用 2 次</li>
+          <li><span class="check">✓</span> QoL 每日追蹤</li>
+          <li><span class="check">✓</span> 用藥管理與提醒</li>
+          <li><span class="check">✓</span> 就醫紀錄</li>
+          <li><span class="check">✓</span> 記帳管理</li>
+          <li><span class="check">✓</span> 照護知識庫</li>
+          <li><span class="cross">-</span> PDF 匯出</li>
+          <li><span class="cross">-</span> 優先支援</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="pricing-btn pricing-btn-outline">免費下載</a>
+      </div>
+
+      <!-- Family -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">最受歡迎</div>
+        <h3>小家庭</h3>
+        <p class="plan-desc">適合 1-2 隻毛孩的家庭</p>
+        <div class="price">NT$120 <span>/月</span></div>
+        <p class="price-annual">年繳 NT$990/年，省 31%</p>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 2 隻毛孩</li>
+          <li><span class="check">✓</span> AI 分析 8 次/月</li>
+          <li><span class="check">✓</span> OCR 辨識 6 次/月</li>
+          <li><span class="check">✓</span> 全部 8 項 AI 功能</li>
+          <li><span class="check">✓</span> QoL 每日追蹤</li>
+          <li><span class="check">✓</span> 用藥管理與提醒</li>
+          <li><span class="check">✓</span> 就醫紀錄</li>
+          <li><span class="check">✓</span> 記帳管理</li>
+          <li><span class="check">✓</span> PDF 匯出無限</li>
+          <li><span class="cross">-</span> 優先支援</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="pricing-btn pricing-btn-primary">選擇小家庭</a>
+      </div>
+
+      <!-- Big Family -->
+      <div class="pricing-card">
+        <h3>大家庭</h3>
+        <p class="plan-desc">多毛孩家庭的最佳選擇</p>
+        <div class="price">NT$350 <span>/月</span></div>
+        <p class="price-annual">年繳 NT$2,990/年，省 29%</p>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 無限毛孩</li>
+          <li><span class="check">✓</span> AI 分析 16 次/月</li>
+          <li><span class="check">✓</span> OCR 辨識 25 次/月</li>
+          <li><span class="check">✓</span> 全部 AI 功能加量</li>
+          <li><span class="check">✓</span> QoL 每日追蹤</li>
+          <li><span class="check">✓</span> 用藥管理與提醒</li>
+          <li><span class="check">✓</span> 就醫紀錄</li>
+          <li><span class="check">✓</span> 記帳管理</li>
+          <li><span class="check">✓</span> PDF 匯出無限</li>
+          <li><span class="check">✓</span> 優先支援</li>
+        </ul>
+        <a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="pricing-btn pricing-btn-outline">選擇大家庭</a>
+      </div>
+
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comparison">
+      <h2>功能比較表</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>功能</th>
+            <th>免費</th>
+            <th>小家庭</th>
+            <th>大家庭</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>毛孩數量</td>
+            <td>1 隻</td>
+            <td>2 隻</td>
+            <td>無限</td>
+          </tr>
+          <tr>
+            <td>QoL 每日追蹤</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>體重記錄與趨勢</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>用藥管理與提醒</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>就醫紀錄</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>記帳管理</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>照護知識庫（22 篇）</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>回憶時光軸</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>心情日記</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>預立醫療指示</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI 分析（血檢、症狀等）</td>
+            <td>試用 2 次</td>
+            <td>8 次/月</td>
+            <td>16 次/月</td>
+          </tr>
+          <tr>
+            <td>OCR 報告辨識</td>
+            <td>試用 2 次</td>
+            <td>6 次/月</td>
+            <td>25 次/月</td>
+          </tr>
+          <tr>
+            <td>AI 陪伴聊天</td>
+            <td>試用</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>PDF 匯出</td>
+            <td><span class="cross">-</span></td>
+            <td>無限</td>
+            <td>無限</td>
+          </tr>
+          <tr>
+            <td>優先支援</td>
+            <td><span class="cross">-</span></td>
+            <td><span class="cross">-</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FAQ -->
+    <div class="pricing-faq">
+      <h2>常見問題</h2>
+
+      <div class="faq-item">
+        <h4>訂閱後可以隨時取消嗎？</h4>
+        <p>可以。訂閱透過 Apple App Store 管理，你可以隨時在 iPhone 設定中取消。取消後，已付費的期間仍可繼續使用所有功能。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>年繳方案如何計費？</h4>
+        <p>年繳方案一次支付整年費用，相較月繳可省下 29-31%。例如小家庭年繳 NT$990，等於每月只要 NT$82.5。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>免費試用次數用完後會怎樣？</h4>
+        <p>免費的 AI 分析和 OCR 試用次數用完後，該功能會提示你升級訂閱。其他基本功能（QoL 追蹤、用藥管理等）不受影響，永久免費。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>可以從小家庭升級到大家庭嗎？</h4>
+        <p>可以。在 App 內的訂閱設定中即可升級或降級方案，Apple 會自動處理差額計算。</p>
+      </div>
+
+      <div class="faq-item">
+        <h4>AI 分析次數月底會重置嗎？</h4>
+        <p>是的。AI 分析和 OCR 辨識的次數會在每個月重新計算，未使用的次數不會累積到下個月。</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">隱私權政策</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">服務條款</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">訂閱方案</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">退款政策</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI 免責聲明</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>

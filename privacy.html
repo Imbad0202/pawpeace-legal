@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隱私權政策 — PawPeace</title>
+  <meta name="description" content="PawPeace 隱私權政策。了解我們如何蒐集、處理、利用及保護您的個人資料。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    .content { position: relative; z-index: 1; }
+
+    .page-header { text-align: center; padding: 140px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .page-header h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-header .updated { font-size: 14px; color: var(--text-light); }
+
+    /* Legal content */
+    .legal {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+    .legal h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .legal h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--secondary);
+      margin: 24px 0 10px;
+    }
+    .legal p {
+      font-size: 15px;
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+    .legal ul, .legal ol {
+      margin: 8px 0 16px 20px;
+      font-size: 15px;
+    }
+    .legal li {
+      margin-bottom: 6px;
+      line-height: 1.7;
+    }
+    .legal a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .legal a:hover {
+      text-decoration: underline;
+    }
+    .legal strong {
+      color: var(--text);
+    }
+    .legal table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .legal th, .legal td {
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal th {
+      background: var(--secondary);
+      color: var(--white);
+      font-weight: 600;
+    }
+    .legal tr:last-child td {
+      border-bottom: none;
+    }
+    .legal-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      text-align: center; padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 120px 20px 48px; }
+      .legal table { font-size: 13px; }
+      .legal th, .legal td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">使用手冊</a></li>
+      <li><a href="pricing.html">方案</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">下載 App</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>隱私權政策</h1>
+      <p class="updated">最後更新日期：2026 年 3 月 1 日</p>
+    </div>
+
+    <div class="legal">
+
+      <p>PawPeace（以下簡稱「本服務」）由 PawPeace 團隊（以下簡稱「我們」）開發及營運。我們深知個人資料對您的重要性，並依據中華民國《個人資料保護法》及相關法令，制定本隱私權政策，向您說明我們如何蒐集、處理、利用及保護您的個人資料。</p>
+      <p>當您下載、安裝或使用 PawPeace 時，即表示您已閱讀、瞭解並同意本隱私權政策的內容。若您不同意，請勿使用本服務。</p>
+
+      <h2>1. 蒐集之個人資料類別與目的</h2>
+      <p>依據《個人資料保護法》第 8 條規定，我們告知您以下事項：</p>
+
+      <h3>1.1 蒐集目的</h3>
+      <ul>
+        <li>行銷業務（040）</li>
+        <li>消費者、客戶管理與服務（090）</li>
+        <li>資（通）訊與資料庫管理（136）</li>
+        <li>其他經營合於營業登記項目或組織章程所定之業務（181）</li>
+      </ul>
+
+      <h3>1.2 蒐集之個人資料類別</h3>
+      <table>
+        <tr><th>資料類別</th><th>內容</th><th>用途</th></tr>
+        <tr><td>帳號資料</td><td>電子郵件地址、顯示名稱（選填）</td><td>註冊、登入、帳號管理</td></tr>
+        <tr><td>第三方登入資料</td><td>Apple ID 或 Google 帳號之身分驗證資訊</td><td>身分驗證</td></tr>
+        <tr><td>寵物資料</td><td>寵物名字、物種、品種、生日、體重、照片</td><td>寵物檔案管理</td></tr>
+        <tr><td>照護紀錄</td><td>每日生活品質評分、備註、心情標記</td><td>生活品質追蹤</td></tr>
+        <tr><td>用藥紀錄</td><td>藥物名稱、劑量、頻率、給藥紀錄</td><td>用藥管理與提醒</td></tr>
+        <tr><td>醫療紀錄</td><td>血液檢查報告（檢驗數值、報告照片）、就診紀錄</td><td>健康追蹤與 AI 分析</td></tr>
+        <tr><td>費用紀錄</td><td>就醫費用（選填）</td><td>費用統計</td></tr>
+        <tr><td>媒體檔案</td><td>照片、語音備忘、日記文字</td><td>回憶紀錄</td></tr>
+        <tr><td>裝置資訊</td><td>裝置類型、作業系統版本</td><td>功能相容性、問題排除</td></tr>
+      </table>
+
+      <h3>1.3 蒐集方式</h3>
+      <p>透過您主動提供（註冊、填寫表單、上傳檔案）及 App 自動記錄（裝置資訊）等方式蒐集。</p>
+
+      <h2>2. 個人資料之利用</h2>
+      <p>您的個人資料僅在蒐集之特定目的範圍內利用，包括：</p>
+      <ul>
+        <li>提供 PawPeace 核心功能：照護紀錄、用藥管理、生活品質追蹤</li>
+        <li>AI 照護功能：將寵物照護數據（QoL 分數、體重、用藥紀錄、檢驗數值等）傳送至 AI 服務進行分析，<strong>不傳送任何飼主個人識別資訊</strong></li>
+        <li>推播通知：用藥提醒、日記提醒、回診提醒（您可隨時關閉）</li>
+        <li>服務改善：分析匿名使用數據以優化功能與體驗</li>
+      </ul>
+      <p>我們<strong>不會</strong>將您的個人資料用於上述目的以外之用途，亦不會將您的個人資料出售予第三方。</p>
+
+      <h2>3. 第三方服務與國際傳輸</h2>
+      <p>為提供本服務，我們使用以下第三方服務。依據《個人資料保護法》第 21 條，您的部分資料可能傳輸至中華民國境外：</p>
+
+      <h3>3.1 Supabase（美國）</h3>
+      <ul>
+        <li>用途：資料庫儲存、使用者身分驗證、檔案儲存</li>
+        <li>傳輸資料：帳號資料、寵物照護紀錄、媒體檔案</li>
+        <li>資料存儲位置：Amazon Web Services (AWS) 雲端伺服器</li>
+        <li>安全措施：傳輸加密、行級安全策略 (RLS)</li>
+        <li>隱私政策：<a href="https://supabase.com/privacy">https://supabase.com/privacy</a></li>
+      </ul>
+
+      <h3>3.2 Anthropic Claude AI（美國）</h3>
+      <ul>
+        <li>用途：8 項 AI 照護功能（症狀評估、用藥交互檢查、照護週報、飲食建議、就醫小幫手、日記輔助、情緒陪伴、紀念文生成）及血檢報告分析、照片文字辨識 (OCR)</li>
+        <li>傳輸資料：<strong>僅寵物照護數據</strong>（QoL 分數、體重趨勢、用藥清單、檢驗數值、物種、診斷等），不含飼主姓名、email 或其他個人識別資訊</li>
+        <li>資料處理：即時處理後不儲存，無法回溯至特定個人</li>
+        <li>隱私政策：<a href="https://www.anthropic.com/privacy">https://www.anthropic.com/privacy</a></li>
+      </ul>
+
+      <h3>3.3 Apple Sign In / Google Sign In</h3>
+      <ul>
+        <li>用途：第三方身分驗證登入</li>
+        <li>傳輸資料：僅取得身分驗證 token，不存取您的通訊錄、照片等其他資料</li>
+      </ul>
+
+      <h3>3.4 RevenueCat（美國）</h3>
+      <ul>
+        <li>用途：應用程式內購買與訂閱管理</li>
+        <li>傳輸資料：用戶識別碼（匿名 UUID）、購買紀錄、訂閱狀態</li>
+        <li>不傳送個人識別資訊（姓名、email 等）</li>
+        <li>隱私政策：<a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></li>
+      </ul>
+
+      <h2>4. AI 照護功能免責聲明</h2>
+      <p>PawPeace 提供以下 AI 照護功能，係利用人工智慧技術輔助寵物照護：</p>
+      <ol>
+        <li><strong>AI 血檢報告分析</strong> — 輔助解讀血液檢查數值</li>
+        <li><strong>AI 症狀評估</strong> — 根據每日照護記錄提供觀察提示與舒適照護建議</li>
+        <li><strong>AI 用藥交互檢查</strong> — 提供藥物交互作用參考資訊</li>
+        <li><strong>AI 照護週報</strong> — 彙整一週照護數據提供摘要與建議</li>
+        <li><strong>AI 飲食建議</strong> — 根據寵物狀況提供營養方向參考</li>
+        <li><strong>AI 就醫小幫手</strong> — 協助準備看診問題與觀察重點</li>
+        <li><strong>AI 日記輔助</strong> — 提供寫作靈感與反思提示</li>
+        <li><strong>AI 情緒陪伴</strong> — 提供飼主情緒支持與陪伴對話</li>
+        <li><strong>AI 紀念文生成</strong> — 為離世寵物生成紀念文</li>
+      </ol>
+      <p>使用上述功能前，請您詳閱並理解以下事項：</p>
+      <ul>
+        <li><strong>非醫療行為</strong>：所有 AI 功能之結果僅供參考，不構成獸醫診斷、醫療建議或治療方案，亦不能取代合格獸醫師之專業判斷。AI 症狀評估與用藥交互檢查定位為「照護觀察輔助」，不提供疾病診斷或處方建議。</li>
+        <li><strong>準確性限制</strong>：AI 分析基於演算法模型產生，可能因資料不完整、數值輸入錯誤、物種差異或其他因素導致分析結果不準確或不適用於您的寵物。</li>
+        <li><strong>應諮詢獸醫</strong>：任何關於寵物健康狀況之疑慮或決策，包括但不限於用藥調整、飲食變更、治療方案選擇，均應諮詢合格獸醫師。</li>
+        <li><strong>情緒支持非心理治療</strong>：AI 情緒陪伴功能提供一般性情緒支持，不構成心理諮商或治療。如您有嚴重情緒困擾，建議撥打生命線 1925 或尋求專業心理諮詢。</li>
+        <li><strong>免責範圍</strong>：我們不對因信賴 AI 功能結果而導致之任何直接、間接、附帶、特殊或衍生性損害承擔責任。</li>
+        <li><strong>持續改善</strong>：我們將持續改善 AI 功能之品質，但無法保證分析結果之完整性、即時性或適用性。</li>
+      </ul>
+      <p>每次 AI 分析結果將附帶以下提示：「此分析僅供參考，不能取代獸醫師的專業判斷。如有疑問，請諮詢您的獸醫。」</p>
+
+      <h2>5. 資料安全措施</h2>
+      <p>我們採取以下措施保護您的個人資料：</p>
+      <ul>
+        <li>所有資料傳輸使用 HTTPS/TLS 加密</li>
+        <li>資料庫採用行級安全策略 (Row Level Security)，確保使用者僅能存取自己的資料</li>
+        <li>AI 分析透過伺服器端 Edge Functions 進行，API 金鑰不存在於用戶端</li>
+        <li>敏感資訊（如驗證 token）使用裝置安全儲存 (Secure Store)</li>
+        <li>密碼以雜湊方式儲存，我們無法讀取您的原始密碼</li>
+      </ul>
+
+      <h2>6. 資料保留期間</h2>
+      <ul>
+        <li>帳號存續期間：您的資料將保留至您主動刪除帳號為止</li>
+        <li>帳號刪除後：所有個人資料、寵物紀錄、媒體檔案及 AI 分析快取將於 <strong>30 天內</strong>完全移除，不可復原</li>
+        <li>匿名統計資料：去識別化後之統計資料可能保留用於服務改善</li>
+      </ul>
+
+      <h2>7. 您的權利</h2>
+      <p>依據《個人資料保護法》第 3 條，您享有以下權利：</p>
+      <ul>
+        <li><strong>查詢及請求閱覽</strong>：您可隨時在 App 中查看您的所有資料</li>
+        <li><strong>請求製給複製本</strong>：您可聯繫我們索取個人資料副本</li>
+        <li><strong>請求補充或更正</strong>：您可隨時在 App 中編輯您的資料</li>
+        <li><strong>請求停止蒐集、處理或利用</strong>：您可聯繫我們要求停止處理</li>
+        <li><strong>請求刪除</strong>：您可在 App「設定」頁面中刪除帳號，或聯繫我們協助處理</li>
+      </ul>
+      <p>行使上述權利，請透過本政策第 11 條所列之聯絡方式與我們聯繫。我們將於收到請求後 30 天內回覆。</p>
+
+      <h2>8. Cookie 及追蹤技術</h2>
+      <p>PawPeace 為原生行動應用程式，不使用網頁 Cookie。App 不內嵌任何第三方廣告追蹤 SDK，亦不進行跨應用程式追蹤。</p>
+
+      <h2>9. 兒童隱私</h2>
+      <p>PawPeace 不針對 13 歲以下兒童提供服務，亦不會刻意蒐集兒童之個人資料。若我們發現不慎蒐集了兒童的個人資料，將立即予以刪除。如果您是家長或監護人，發現您的子女在未經同意下使用了本服務，請立即與我們聯繫。</p>
+
+      <h2>10. 隱私權政策之修訂</h2>
+      <p>我們可能因法令變更或服務調整而修訂本隱私權政策。修訂後之政策將公布於本頁面，並更新「最後更新日期」。如有重大變更，我們將透過 App 內通知或電子郵件告知您。建議您定期查閱本政策。</p>
+
+      <h2>11. 聯絡我們</h2>
+      <p>若您對本隱私權政策有任何疑問，或欲行使個人資料相關權利，請透過以下方式聯繫：</p>
+      <ul>
+        <li>Email：<a href="mailto:pawpeace0225@gmail.com">pawpeace0225@gmail.com</a></li>
+        <li>開發者：PawPeace 團隊</li>
+      </ul>
+
+      <p class="legal-note">本隱私權政策適用中華民國法律。如有爭議，以臺灣臺北地方法院為第一審管轄法院。</p>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">隱私權政策</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">服務條款</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">訂閱方案</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">退款政策</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI 免責聲明</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>
