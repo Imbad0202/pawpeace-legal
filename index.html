@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GentleMao — 陪伴毛孩走過每一天</title>
   <meta name="description" content="GentleMao 寵物安寧照護 App，陪伴飼主與毛孩走過生命中最珍貴的時光。QoL 追蹤、AI 血檢分析、用藥管理、情緒陪伴。">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8A87C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='4' r='2'/><circle cx='18' cy='8' r='2'/><circle cx='4' cy='8' r='2'/><path d='M12 18c-4 0-7-2-7-4a5 5 0 0 1 10 0c0 2-3 4-7 4z'/></svg>">
   <link rel="alternate" hreflang="zh-TW" href="https://gentlemao.app/index" />
   <link rel="alternate" hreflang="en" href="https://gentlemao.app/en/index" />
   <link rel="alternate" hreflang="x-default" href="https://gentlemao.app/index" />
@@ -609,7 +609,15 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; stroke-width: 2; }
+    .feature-icon .icon, .everything-emoji .icon, .fn-emoji .icon { width: 40px; height: 40px; color: var(--primary); }
+    .everything-emoji .icon { width: 28px; height: 28px; }
+    .fn-emoji .icon { width: 20px; height: 20px; }
+    .nav-logo-icon .icon { width: 24px; height: 24px; }
+    .step-number .icon { width: 24px; height: 24px; }
+    .toc-num .icon { width: 14px; height: 14px; }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -621,7 +629,7 @@
   <!-- Sticky Nav -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-icon">🐾</span>
+      <span class="nav-logo-icon"><i data-lucide="paw-print" class="icon"></i></span>
       <span>GentleMao</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
@@ -645,7 +653,7 @@
           下載 App
         </a>
         <a href="manual.html" class="btn-secondary">
-          📖 使用手冊
+          <i data-lucide="book-open" class="icon"></i> 使用手冊
         </a>
       </div>
       <div class="scroll-hint">↓</div>
@@ -659,17 +667,17 @@
         <p class="section-desc">從生活品質追蹤到 AI 智慧分析，GentleMao 讓照護變得更有方向、更安心。</p>
         <div class="features-grid">
           <div class="feature-card reveal">
-            <div class="feature-icon">📊</div>
+            <div class="feature-icon"><i data-lucide="bar-chart-3" class="icon"></i></div>
             <h3>生活品質追蹤</h3>
             <p>依據 HHHHHMM 量表的 7 項指標進行每日 QoL 評分，搭配趨勢圖表，用溫柔的方式關注毛孩的狀態變化。</p>
           </div>
           <div class="feature-card reveal reveal-delay-1">
-            <div class="feature-icon">🤖</div>
+            <div class="feature-icon"><i data-lucide="bot" class="icon"></i></div>
             <h3>AI 智慧分析</h3>
             <p>血檢報告 AI 解讀、X 光觀察描述、飲食建議、症狀評估，讓 AI 成為你的照護夥伴。</p>
           </div>
           <div class="feature-card reveal reveal-delay-2">
-            <div class="feature-icon">💛</div>
+            <div class="feature-icon"><i data-lucide="heart" class="icon"></i></div>
             <h3>心理支持</h3>
             <p>AI 情緒陪伴對話、心情日記引導寫作、自我照顧提醒，照顧毛孩的同時，也照顧你自己。</p>
           </div>
@@ -713,42 +721,42 @@
         <p class="section-desc">從日常記錄到專業分析，GentleMao 涵蓋寵物安寧照護的每個面向。</p>
         <div class="everything-grid">
           <div class="everything-card reveal">
-            <span class="everything-emoji">💊</span>
+            <span class="everything-emoji"><i data-lucide="pill" class="icon"></i></span>
             <div>
               <h4>用藥管理</h4>
               <p>藥物排程、自訂提醒時間、庫存追蹤、AI 用藥交互檢查，不再錯過每一次給藥。</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-1">
-            <span class="everything-emoji">🔬</span>
+            <span class="everything-emoji"><i data-lucide="microscope" class="icon"></i></span>
             <div>
               <h4>血檢分析</h4>
               <p>手動輸入或拍照 OCR 上傳血檢報告，AI 幫你解讀指數變化與歷史趨勢。</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-2">
-            <span class="everything-emoji">🩻</span>
+            <span class="everything-emoji"><i data-lucide="scan" class="icon"></i></span>
             <div>
               <h4>X 光觀察</h4>
               <p>上傳 X 光影像，AI Vision 提供觀察描述，幫助你記錄影像發現。</p>
             </div>
           </div>
           <div class="everything-card reveal">
-            <span class="everything-emoji">🏥</span>
+            <span class="everything-emoji"><i data-lucide="building-2" class="icon"></i></span>
             <div>
               <h4>就醫紀錄</h4>
               <p>記錄回診時間、診斷內容、附件。AI 就醫小幫手幫你準備看診問題。</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-1">
-            <span class="everything-emoji">💰</span>
+            <span class="everything-emoji"><i data-lucide="wallet" class="icon"></i></span>
             <div>
               <h4>記帳管理</h4>
               <p>分類記錄醫療與照護花費，圓餅圖與月報表讓開支一目瞭然。</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-2">
-            <span class="everything-emoji">📚</span>
+            <span class="everything-emoji"><i data-lucide="book-open" class="icon"></i></span>
             <div>
               <h4>照護知識庫</h4>
               <p>22 篇經獸醫文獻交叉驗證的專業文章，涵蓋居家照護、觀察指南、營養建議。</p>
@@ -831,5 +839,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+<script>lucide.createIcons();</script>
 </body>
 </html>

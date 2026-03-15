@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plans & Pricing — GentleMao</title>
   <meta name="description" content="GentleMao subscription plans and pricing. Free plan, Family plan, Big Family plan — find the right fit for your pet care needs.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8A87C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='4' r='2'/><circle cx='18' cy='8' r='2'/><circle cx='4' cy='8' r='2'/><path d='M12 18c-4 0-7-2-7-4a5 5 0 0 1 10 0c0 2-3 4-7 4z'/></svg>">
   <link rel="alternate" hreflang="zh-TW" href="https://gentlemao.app/pricing" />
   <link rel="alternate" hreflang="en" href="https://gentlemao.app/en/pricing" />
   <link rel="alternate" hreflang="x-default" href="https://gentlemao.app/pricing" />
@@ -162,7 +162,15 @@
       .pricing-grid { grid-template-columns: 1fr 1fr; }
       .pricing-card:last-child { grid-column: span 2; max-width: 50%; margin: 0 auto; }
     }
+    .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; stroke-width: 2; }
+    .feature-icon .icon, .everything-emoji .icon, .fn-emoji .icon { width: 40px; height: 40px; color: var(--primary); }
+    .everything-emoji .icon { width: 28px; height: 28px; }
+    .fn-emoji .icon { width: 20px; height: 20px; }
+    .nav-logo-icon .icon { width: 24px; height: 24px; }
+    .step-number .icon { width: 24px; height: 24px; }
+    .toc-num .icon { width: 14px; height: 14px; }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -170,7 +178,7 @@
   <div class="bg-orb bg-orb-2"></div>
 
   <nav id="nav">
-    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>GentleMao</span></a>
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i data-lucide="paw-print" class="icon"></i></span><span>GentleMao</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="manual.html">User Guide</a></li>
@@ -354,5 +362,6 @@
       link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
     });
   </script>
+<script>lucide.createIcons();</script>
 </body>
 </html>

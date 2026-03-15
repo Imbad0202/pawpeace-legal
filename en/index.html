@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GentleMao — With Your Pet, Every Single Day</title>
   <meta name="description" content="GentleMao is a pet hospice care app that walks alongside pet owners through their companion's end-of-life journey. QoL tracking, AI blood test analysis, medication management, emotional support.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8A87C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='4' r='2'/><circle cx='18' cy='8' r='2'/><circle cx='4' cy='8' r='2'/><path d='M12 18c-4 0-7-2-7-4a5 5 0 0 1 10 0c0 2-3 4-7 4z'/></svg>">
   <link rel="alternate" hreflang="zh-TW" href="https://gentlemao.app/index" />
   <link rel="alternate" hreflang="en" href="https://gentlemao.app/en/index" />
   <link rel="alternate" hreflang="x-default" href="https://gentlemao.app/index" />
@@ -609,7 +609,15 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; stroke-width: 2; }
+    .feature-icon .icon, .everything-emoji .icon, .fn-emoji .icon { width: 40px; height: 40px; color: var(--primary); }
+    .everything-emoji .icon { width: 28px; height: 28px; }
+    .fn-emoji .icon { width: 20px; height: 20px; }
+    .nav-logo-icon .icon { width: 24px; height: 24px; }
+    .step-number .icon { width: 24px; height: 24px; }
+    .toc-num .icon { width: 14px; height: 14px; }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -621,7 +629,7 @@
   <!-- Sticky Nav -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">
-      <span class="nav-logo-icon">🐾</span>
+      <span class="nav-logo-icon"><i data-lucide="paw-print" class="icon"></i></span>
       <span>GentleMao</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
@@ -659,17 +667,17 @@
         <p class="section-desc">From quality-of-life tracking to AI-powered analysis, GentleMao helps you care with more direction and confidence.</p>
         <div class="features-grid">
           <div class="feature-card reveal">
-            <div class="feature-icon">📊</div>
+            <div class="feature-icon"><i data-lucide="bar-chart-3" class="icon"></i></div>
             <h3>Quality of Life Tracking</h3>
             <p>Daily QoL scoring based on 7 indicators from the HHHHHMM scale, complete with trend charts to gently monitor your pet's condition over time.</p>
           </div>
           <div class="feature-card reveal reveal-delay-1">
-            <div class="feature-icon">🤖</div>
+            <div class="feature-icon"><i data-lucide="bot" class="icon"></i></div>
             <h3>AI-Powered Analysis</h3>
             <p>Blood test report interpretation, X-ray observation notes, dietary recommendations, symptom assessment -- let AI be your care companion.</p>
           </div>
           <div class="feature-card reveal reveal-delay-2">
-            <div class="feature-icon">💛</div>
+            <div class="feature-icon"><i data-lucide="heart" class="icon"></i></div>
             <h3>Emotional Support</h3>
             <p>AI companion chat, guided mood journaling, self-care reminders -- while you care for your pet, we help you care for yourself too.</p>
           </div>
@@ -713,42 +721,42 @@
         <p class="section-desc">From daily logging to professional analysis, GentleMao covers every aspect of pet hospice care.</p>
         <div class="everything-grid">
           <div class="everything-card reveal">
-            <span class="everything-emoji">💊</span>
+            <span class="everything-emoji"><i data-lucide="pill" class="icon"></i></span>
             <div>
               <h4>Medication Management</h4>
               <p>Drug schedules, custom reminder times, inventory tracking, AI drug interaction checks -- never miss a dose.</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-1">
-            <span class="everything-emoji">🔬</span>
+            <span class="everything-emoji"><i data-lucide="microscope" class="icon"></i></span>
             <div>
               <h4>Blood Test Analysis</h4>
               <p>Enter values manually or upload reports via OCR photo scanning. AI interprets trends and historical changes.</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-2">
-            <span class="everything-emoji">🩻</span>
+            <span class="everything-emoji"><i data-lucide="scan" class="icon"></i></span>
             <div>
               <h4>X-Ray Observation</h4>
               <p>Upload X-ray images and let AI Vision provide observational descriptions to help document imaging findings.</p>
             </div>
           </div>
           <div class="everything-card reveal">
-            <span class="everything-emoji">🏥</span>
+            <span class="everything-emoji"><i data-lucide="building-2" class="icon"></i></span>
             <div>
               <h4>Vet Visit Records</h4>
               <p>Log appointment dates, diagnoses, and attachments. AI vet visit helper prepares your questions before each visit.</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-1">
-            <span class="everything-emoji">💰</span>
+            <span class="everything-emoji"><i data-lucide="wallet" class="icon"></i></span>
             <div>
               <h4>Expense Tracking</h4>
               <p>Categorize medical and care expenses with pie charts and monthly reports for a clear financial overview.</p>
             </div>
           </div>
           <div class="everything-card reveal reveal-delay-2">
-            <span class="everything-emoji">📚</span>
+            <span class="everything-emoji"><i data-lucide="book-open" class="icon"></i></span>
             <div>
               <h4>Care Knowledge Base</h4>
               <p>22 expert articles cross-referenced with veterinary literature, covering home care, observation guides, and nutrition.</p>
@@ -831,5 +839,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+<script>lucide.createIcons();</script>
 </body>
 </html>

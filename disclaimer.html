@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 醫療免責聲明 — GentleMao</title>
   <meta name="description" content="GentleMao AI 醫療免責聲明。了解 AI 分析功能的性質、限制與資料處理方式。">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8A87C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='4' r='2'/><circle cx='18' cy='8' r='2'/><circle cx='4' cy='8' r='2'/><path d='M12 18c-4 0-7-2-7-4a5 5 0 0 1 10 0c0 2-3 4-7 4z'/></svg>">
   <link rel="alternate" hreflang="zh-TW" href="https://gentlemao.app/disclaimer" />
   <link rel="alternate" hreflang="en" href="https://gentlemao.app/en/disclaimer" />
   <link rel="alternate" hreflang="x-default" href="https://gentlemao.app/disclaimer" />
@@ -256,7 +256,15 @@
       .page-header { padding: 120px 20px 48px; }
       .ai-function-list { grid-template-columns: 1fr; }
     }
+    .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; stroke-width: 2; }
+    .feature-icon .icon, .everything-emoji .icon, .fn-emoji .icon { width: 40px; height: 40px; color: var(--primary); }
+    .everything-emoji .icon { width: 28px; height: 28px; }
+    .fn-emoji .icon { width: 20px; height: 20px; }
+    .nav-logo-icon .icon { width: 24px; height: 24px; }
+    .step-number .icon { width: 24px; height: 24px; }
+    .toc-num .icon { width: 14px; height: 14px; }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -264,7 +272,7 @@
   <div class="bg-orb bg-orb-2"></div>
 
   <nav id="nav">
-    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>GentleMao</span></a>
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i data-lucide="paw-print" class="icon"></i></span><span>GentleMao</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="manual.html">使用手冊</a></li>
@@ -293,16 +301,16 @@
       <p>GentleMao 目前提供以下 AI 輔助功能：</p>
 
       <ul class="ai-function-list">
-        <li><span class="fn-emoji">🔬</span><span class="fn-text">AI 血檢報告分析</span></li>
-        <li><span class="fn-emoji">🩺</span><span class="fn-text">AI 症狀評估</span></li>
-        <li><span class="fn-emoji">💊</span><span class="fn-text">AI 用藥交互檢查</span></li>
-        <li><span class="fn-emoji">📋</span><span class="fn-text">AI 照護週報</span></li>
-        <li><span class="fn-emoji">🥗</span><span class="fn-text">AI 飲食建議</span></li>
-        <li><span class="fn-emoji">🏥</span><span class="fn-text">AI 就醫小幫手</span></li>
-        <li><span class="fn-emoji">✨</span><span class="fn-text">AI 日記輔助</span></li>
-        <li><span class="fn-emoji">💛</span><span class="fn-text">AI 情緒陪伴</span></li>
-        <li><span class="fn-emoji">🕊️</span><span class="fn-text">AI 紀念文生成</span></li>
-        <li><span class="fn-emoji">📸</span><span class="fn-text">OCR 報告文字辨識</span></li>
+        <li><span class="fn-emoji"><i data-lucide="microscope" class="icon"></i></span><span class="fn-text">AI 血檢報告分析</span></li>
+        <li><span class="fn-emoji"><i data-lucide="stethoscope" class="icon"></i></span><span class="fn-text">AI 症狀評估</span></li>
+        <li><span class="fn-emoji"><i data-lucide="pill" class="icon"></i></span><span class="fn-text">AI 用藥交互檢查</span></li>
+        <li><span class="fn-emoji"><i data-lucide="clipboard-list" class="icon"></i></span><span class="fn-text">AI 照護週報</span></li>
+        <li><span class="fn-emoji"><i data-lucide="utensils" class="icon"></i></span><span class="fn-text">AI 飲食建議</span></li>
+        <li><span class="fn-emoji"><i data-lucide="building-2" class="icon"></i></span><span class="fn-text">AI 就醫小幫手</span></li>
+        <li><span class="fn-emoji"><i data-lucide="sparkles" class="icon"></i></span><span class="fn-text">AI 日記輔助</span></li>
+        <li><span class="fn-emoji"><i data-lucide="heart" class="icon"></i></span><span class="fn-text">AI 情緒陪伴</span></li>
+        <li><span class="fn-emoji"><i data-lucide="cloud-sun" class="icon"></i></span><span class="fn-text">AI 紀念文生成</span></li>
+        <li><span class="fn-emoji"><i data-lucide="camera" class="icon"></i></span><span class="fn-text">OCR 報告文字辨識</span></li>
       </ul>
 
       <h2>2. AI 分析僅供參考</h2>
@@ -479,5 +487,6 @@
       link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
     });
   </script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
