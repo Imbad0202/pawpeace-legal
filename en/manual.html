@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Guide — PawPeace</title>
+  <meta name="description" content="PawPeace complete user guide. Learn how to use QoL tracking, medication management, AI blood test analysis, emotional support, and more.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="alternate" hreflang="zh-TW" href="https://pawpeace.app/manual" />
+  <link rel="alternate" hreflang="en" href="https://pawpeace.app/en/manual" />
+  <link rel="alternate" hreflang="x-default" href="https://pawpeace.app/manual" />
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-lang { font-size: 13px; color: var(--text-light); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
+    .nav-lang:hover { border-color: var(--primary); color: var(--primary); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    .content { position: relative; z-index: 1; }
+
+    .page-header { text-align: center; padding: 140px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .page-header h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-header p { font-size: 16px; color: var(--text-light); max-width: 520px; margin: 0 auto; }
+
+    .toc { max-width: 720px; margin: 0 auto 48px; padding: 0 24px; }
+    .toc-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-sm); }
+    .toc-card h2 { font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 16px; }
+    .toc-list { list-style: none; columns: 2; column-gap: 24px; }
+    .toc-list li { break-inside: avoid; margin-bottom: 8px; }
+    .toc-list a { text-decoration: none; color: var(--text); font-size: 15px; display: flex; align-items: center; gap: 8px; padding: 6px 0; transition: color 0.2s; }
+    .toc-list a:hover { color: var(--primary); }
+    .toc-num { background: var(--primary-light); color: var(--primary-dark); font-size: 12px; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    .manual { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+    .manual-section { margin-bottom: 48px; }
+    .manual-section h2 { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); scroll-margin-top: 80px; }
+    .manual-section h3 { font-size: 18px; font-weight: 700; color: var(--secondary); margin: 24px 0 12px; }
+    .manual-section h4 { font-size: 16px; font-weight: 600; color: var(--accent); margin: 16px 0 8px; }
+    .manual-section p { font-size: 15px; color: var(--text); margin-bottom: 12px; line-height: 1.8; }
+    .manual-section ul, .manual-section ol { margin: 8px 0 16px 20px; font-size: 15px; color: var(--text); }
+    .manual-section li { margin-bottom: 6px; line-height: 1.7; }
+    .tip-box { background: var(--white); border-left: 4px solid var(--secondary); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin: 16px 0; font-size: 14px; color: var(--text); }
+    .tip-box strong { color: var(--secondary); }
+    .warning-box { background: #FFF5F5; border-left: 4px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin: 16px 0; font-size: 14px; color: var(--text); }
+    .warning-box strong { color: var(--accent); }
+
+    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .toc-list { columns: 1; }
+      .page-header { padding: 120px 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">User Guide</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="../manual.html" class="nav-lang">中文</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>User Guide</h1>
+      <p>Learn everything PawPeace has to offer, so every day with your pet can be gently recorded.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-card">
+        <h2>Table of Contents</h2>
+        <ol class="toc-list">
+          <li><a href="#sec1"><span class="toc-num">1</span>Getting Started</a></li>
+          <li><a href="#sec2"><span class="toc-num">2</span>Home & Pet Meadow</a></li>
+          <li><a href="#sec3"><span class="toc-num">3</span>Daily Care Journal</a></li>
+          <li><a href="#sec4"><span class="toc-num">4</span>Medication Management</a></li>
+          <li><a href="#sec5"><span class="toc-num">5</span>AI Analysis Features</a></li>
+          <li><a href="#sec6"><span class="toc-num">6</span>Vet Visit Records</a></li>
+          <li><a href="#sec7"><span class="toc-num">7</span>Expense Tracking</a></li>
+          <li><a href="#sec8"><span class="toc-num">8</span>More Features</a></li>
+          <li><a href="#sec9"><span class="toc-num">9</span>Subscription Plans</a></li>
+          <li><a href="#sec10"><span class="toc-num">10</span>FAQ</a></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="manual">
+
+      <div class="manual-section" id="sec1">
+        <h2>1. Getting Started</h2>
+
+        <h3>1.1 Download & Install</h3>
+        <p>PawPeace currently supports iOS 16.0 and later. You can search for "PawPeace" on the App Store or <a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" style="color:var(--primary)">download directly here</a>.</p>
+
+        <h3>1.2 Registration & Login</h3>
+        <p>PawPeace offers three login methods:</p>
+        <ul>
+          <li><strong>Email registration</strong>: Enter your email and password to create an account. A verification email will be sent -- click the link in your inbox to complete registration.</li>
+          <li><strong>Sign in with Apple</strong>: Tap "Sign in with Apple" and verify with Face ID or Touch ID. You can choose to hide your email address.</li>
+          <li><strong>Sign in with Google</strong>: Tap "Sign in with Google" and select your Google account to complete verification.</li>
+        </ul>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> When using Sign in with Apple with "Hide My Email," all app features work normally. Apple automatically forwards notification emails to your real inbox.
+        </div>
+
+        <h3>1.3 First-Time Use</h3>
+        <p>After your first login, the app will guide you through the medical disclaimer. Once confirmed, you'll enter the main screen and can start adding your first pet.</p>
+      </div>
+
+      <div class="manual-section" id="sec2">
+        <h2>2. Home & Pet Meadow</h2>
+
+        <h3>2.1 Pet Meadow</h3>
+        <p>The home screen features a cozy meadow scene where your pets appear as animated characters. Tap on a pet to access their detailed profile. The meadow gets livelier as you add more pets.</p>
+
+        <h3>2.2 Adding a Pet</h3>
+        <p>Tap the "+" button in the top-right corner of the home screen and fill in:</p>
+        <ul>
+          <li><strong>Name</strong> (required): Your pet's name</li>
+          <li><strong>Species</strong> (required): Cat, dog, or other</li>
+          <li><strong>Breed</strong> (optional): e.g., Calico, Shiba Inu</li>
+          <li><strong>Sex</strong> (optional): Male, female, or neutered/spayed</li>
+          <li><strong>Birthday</strong> (optional): An approximate date is fine</li>
+          <li><strong>Weight</strong> (optional): Current weight in kg</li>
+          <li><strong>Photo</strong> (optional): Choose from your photo library or take a new one</li>
+          <li><strong>Diagnosis</strong> (optional): e.g., kidney disease, tumor -- used for AI analysis context</li>
+        </ul>
+
+        <h3>2.3 Pet Profile</h3>
+        <p>Tap on a pet to access their detailed page, which shows:</p>
+        <ul>
+          <li>Basic info and profile photo</li>
+          <li>Today's QoL score summary</li>
+          <li>7-day QoL trend line chart</li>
+          <li>Weight trend chart</li>
+          <li>Today's medication status</li>
+          <li>Quick-access buttons for all features</li>
+        </ul>
+
+        <h3>2.4 Daily Summary</h3>
+        <p>On the pet's detail page, you get an at-a-glance overview of today's care status, including QoL score, whether today's log is complete, and medication progress.</p>
+      </div>
+
+      <div class="manual-section" id="sec3">
+        <h2>3. Daily Care Journal</h2>
+
+        <h3>3.1 Quality of Life (QoL) Scoring</h3>
+        <p>PawPeace uses a modified HHHHHMM scale to assess your pet's quality of life across 7 dimensions, each scored 0-10:</p>
+        <ol>
+          <li><strong>Pain</strong> -- Does your pet seem comfortable today? (weight x2)</li>
+          <li><strong>Appetite</strong> -- Did they eat well today? (weight x1.5)</li>
+          <li><strong>Hydration</strong> -- Is their water intake normal? (weight x1.5)</li>
+          <li><strong>Mobility</strong> -- Can they move around on their own? (weight x1)</li>
+          <li><strong>Happiness</strong> -- Are they still playful or affectionate? (weight x1.5)</li>
+          <li><strong>Hygiene</strong> -- Is their body clean? (weight x1)</li>
+          <li><strong>Overall</strong> -- How do you feel they're doing today? (weight x1.5)</li>
+        </ol>
+        <p>The system calculates a weighted average displayed as a 0-10 score. Long-term trend charts let you see the direction of change over time.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> There is no absolute "good" or "bad" QoL score -- what matters is observing the trend. If scores decline steadily, the system will gently suggest discussing care direction with your vet.
+        </div>
+
+        <h3>3.2 Weight Records</h3>
+        <p>Enter today's weight (in kg) in the daily log. The system automatically charts weight trends. For pets in hospice care, weight changes are an important health indicator.</p>
+
+        <h3>3.3 Notes & Voice Memos</h3>
+        <p>Each daily log can include text notes and voice memos. When you're too busy to type, just hold the record button and speak.</p>
+
+        <h3>3.4 AI Symptom Assessment</h3>
+        <p>After completing a daily log, you can ask AI to review today's QoL scores and notes, providing observation tips and comfort care suggestions in a gentle tone.</p>
+
+        <div class="warning-box">
+          <strong>Important:</strong> AI symptom assessment is for reference only and does not constitute a veterinary diagnosis. If your pet shows abnormal symptoms, please consult your veterinarian.
+        </div>
+      </div>
+
+      <div class="manual-section" id="sec4">
+        <h2>4. Medication Management</h2>
+
+        <h3>4.1 Adding Medications</h3>
+        <p>On the "Medications" page, tap "+" to add a new medication:</p>
+        <ul>
+          <li><strong>Medication name</strong>: e.g., "Semintra," "Cerenia"</li>
+          <li><strong>Dosage</strong>: Amount per dose, e.g., "1 tablet," "0.5ml"</li>
+          <li><strong>Frequency</strong>: How many times per day</li>
+          <li><strong>Notes</strong>: Special instructions, e.g., "Take after meals," "Keep refrigerated"</li>
+          <li><strong>Reminder times</strong>: Set custom reminder times with multiple time slots</li>
+          <li><strong>Inventory count</strong> (optional): Remaining quantity</li>
+        </ul>
+
+        <h3>4.2 Dose Logging</h3>
+        <p>When you administer medication, tap "Done" on the medication card. The system records the time and updates the daily medication progress. If a dose is skipped, you can choose "Skip" and optionally note the reason.</p>
+
+        <h3>4.3 Inventory Tracking</h3>
+        <p>If you set an inventory count, it automatically decrements each time you log a dose. When inventory drops below your alert threshold, the system notifies you to restock.</p>
+
+        <h3>4.4 AI Drug Interaction Check</h3>
+        <p>When multiple medications are added, use "AI Drug Interaction Check." AI analyzes potential interactions between all current medications and flags them by concern level.</p>
+
+        <div class="warning-box">
+          <strong>Important:</strong> AI drug interaction checks are for reference only and do not constitute medication advice. Always consult your veterinarian before making any medication changes.
+        </div>
+      </div>
+
+      <div class="manual-section" id="sec5">
+        <h2>5. AI Analysis Features</h2>
+
+        <h3>5.1 Blood Test Reports</h3>
+
+        <h4>Manual Entry</h4>
+        <p>On the "Blood Tests" page, tap "+" to add a report, then select "Manual Entry." You can enter individual test values (e.g., BUN, Creatinine, HCT) with quick-select options for common items.</p>
+
+        <h4>OCR Photo Upload</h4>
+        <p>Select "Photo Upload" mode and point your camera at the paper report. AI automatically recognizes values and fills them in. Please verify the results and correct any errors manually.</p>
+
+        <h4>PDF Upload</h4>
+        <p>If you have a digital report (PDF), you can select and upload it. AI will attempt to extract and populate the values.</p>
+
+        <h4>AI Analysis</h4>
+        <p>After creating a report, tap "AI Analysis." AI interprets each value based on your pet's species and age, flags abnormalities, and provides observation suggestions in easy-to-understand language.</p>
+
+        <h4>Trend Charts</h4>
+        <p>With multiple reports accumulated, view historical trends for each value. Select items (e.g., BUN, Creatinine) to see line charts showing changes over time.</p>
+
+        <h3>5.2 X-Ray Observation</h3>
+
+        <h4>Capture or Upload</h4>
+        <p>You can upload X-ray images by photographing a lightbox display or selecting from your photo library.</p>
+
+        <h4>AI Observation Notes</h4>
+        <p>After uploading, tap "AI Observe" for AI Vision to describe observations in the image. This helps you discuss imaging findings with your vet.</p>
+
+        <div class="warning-box">
+          <strong>Important:</strong> AI X-ray observation is descriptive only and does not constitute imaging diagnosis. Formal image interpretation must be performed by a veterinarian or veterinary radiologist.
+        </div>
+      </div>
+
+      <div class="manual-section" id="sec6">
+        <h2>6. Vet Visit Records</h2>
+
+        <h3>6.1 Adding Visit Records</h3>
+        <p>On the "Vet Visits" page, tap "+" to add a new record:</p>
+        <ul>
+          <li><strong>Visit date</strong>: Date and time of the appointment</li>
+          <li><strong>Hospital/Vet</strong>: Name of the clinic or veterinarian</li>
+          <li><strong>Diagnosis</strong>: Vet's diagnosis or observations</li>
+          <li><strong>Treatment</strong>: Procedures or treatments performed</li>
+          <li><strong>Notes</strong>: Vet's instructions or follow-up notes</li>
+          <li><strong>Next visit</strong> (optional): Scheduled follow-up date</li>
+          <li><strong>Cost</strong> (optional): Visit expense</li>
+        </ul>
+
+        <h3>6.2 Attachments</h3>
+        <p>Each visit record supports photo attachments (e.g., prescriptions, diagnostic reports). These are securely stored in the cloud for easy access later.</p>
+
+        <h3>6.3 AI Vet Visit Helper</h3>
+        <p>Before a visit, use "AI Vet Visit Helper." AI reviews your pet's recent QoL logs, medications, and blood test data to prepare:</p>
+        <ul>
+          <li>A list of questions to ask your vet</li>
+          <li>A summary of recent observations</li>
+          <li>Data trend highlights</li>
+        </ul>
+        <p>So you never forget what to ask during the appointment.</p>
+      </div>
+
+      <div class="manual-section" id="sec7">
+        <h2>7. Expense Tracking</h2>
+
+        <h3>7.1 Adding Expenses</h3>
+        <p>On the "Expenses" page, tap "+" to log a new expense:</p>
+        <ul>
+          <li><strong>Amount</strong>: Expense amount</li>
+          <li><strong>Category</strong>: Medical, medication, food, supplies, other</li>
+          <li><strong>Date</strong>: Date of purchase</li>
+          <li><strong>Notes</strong> (optional): Additional details</li>
+        </ul>
+
+        <h3>7.2 Charts & Analytics</h3>
+        <p>The expense page provides visual charts:</p>
+        <ul>
+          <li><strong>Category pie chart</strong>: Breakdown of spending by category</li>
+          <li><strong>Monthly trend</strong>: Total spending trend over time</li>
+          <li><strong>Cumulative total</strong>: Overall spending to date</li>
+        </ul>
+        <p>These insights help you understand care costs and organize records.</p>
+      </div>
+
+      <div class="manual-section" id="sec8">
+        <h2>8. More Features</h2>
+
+        <h3>8.1 Care Knowledge Base</h3>
+        <p>PawPeace includes 22 expert care articles across three themes:</p>
+        <ul>
+          <li><strong>Home care</strong>: Subcutaneous fluid administration, nutrition management, environment setup</li>
+          <li><strong>Observation guides</strong>: Pain recognition, vital sign monitoring, emergency assessment</li>
+          <li><strong>Nutrition & diet</strong>: Kidney disease diets, appetite stimulation, supplements</li>
+        </ul>
+        <p>All articles are cross-referenced with veterinary literature and written in a warm, practical tone.</p>
+
+        <h3>8.2 Memory Timeline</h3>
+        <p>The timeline connects the important moments in your pet's life -- first adoption, first vet visit, trips, anniversaries. Add events and attach photos to tell your pet's complete life story.</p>
+
+        <h3>8.3 Emotional Support</h3>
+        <p>Caring for a pet in hospice is a demanding journey. PawPeace's emotional support features include:</p>
+        <ul>
+          <li><strong>Mood journal</strong>: Guided writing prompts to help you process your feelings</li>
+          <li><strong>Self-care reminders</strong>: Gentle nudges to take care of yourself too</li>
+          <li><strong>AI journal assistant</strong>: Writing inspiration and reflection prompts</li>
+        </ul>
+
+        <h3>8.4 AI Companion Chat</h3>
+        <p>Sometimes you just need someone to listen. AI Companion Chat is like a gentle friend who's there to hear about your care journey, your worries, or the little happy moments. It listens first before offering any suggestions.</p>
+
+        <div class="tip-box">
+          <strong>Tip:</strong> AI Companion Chat provides general emotional support, not professional counseling. If you are experiencing severe emotional distress, please contact the 988 Suicide & Crisis Lifeline (call or text 988) or seek professional help.
+        </div>
+
+        <h3>8.5 Advance Care Directive</h3>
+        <p>While your pet is stable, take time to think about and document future care preferences:</p>
+        <ul>
+          <li>Whether to accept emergency resuscitation</li>
+          <li>Preference for aggressive treatment vs. comfort care</li>
+          <li>Euthanasia considerations and personal boundaries</li>
+          <li>After-life arrangement preferences</li>
+        </ul>
+        <p>Making these decisions during calmer times helps you face difficult moments with more clarity and peace.</p>
+
+        <h3>8.6 Settings</h3>
+        <p>Find settings in the "More" tab:</p>
+        <ul>
+          <li><strong>Notifications</strong>: Manage medication reminders, journal reminders, etc.</li>
+          <li><strong>Account</strong>: Change password, manage Passkeys</li>
+          <li><strong>Subscription</strong>: View current plan, upgrade, or manage subscription</li>
+          <li><strong>Data export</strong>: Export care records as PDF</li>
+          <li><strong>Delete account</strong>: Permanently delete your account and all data</li>
+        </ul>
+      </div>
+
+      <div class="manual-section" id="sec9">
+        <h2>9. Subscription Plans</h2>
+        <p>PawPeace offers a free plan and two paid subscription tiers. For details, see the <a href="pricing.html" style="color:var(--primary);font-weight:600">Plans & Pricing page</a>.</p>
+        <p>Core care features (QoL tracking, medication management, vet visit records, etc.) are completely free. AI analysis features include free trial uses; subscribe for additional usage.</p>
+      </div>
+
+      <div class="manual-section" id="sec10">
+        <h2>10. FAQ</h2>
+
+        <h3>Q: Does PawPeace cost money?</h3>
+        <p>Core features are completely free, including QoL tracking, medication management, vet visit records, expense tracking, and the knowledge base. AI features include free trial uses (2 AI analyses + 2 OCR scans). Subscribe for more.</p>
+
+        <h3>Q: Is my data secure?</h3>
+        <p>All data is transmitted via HTTPS encryption and stored on secure cloud servers. The database uses Row Level Security (RLS) so you can only access your own data. During AI analysis, only pet care data is sent -- no personal owner information is ever transmitted.</p>
+
+        <h3>Q: Can I trust the AI analysis results?</h3>
+        <p>AI analysis results are for reference only and do not constitute veterinary diagnoses or medical advice. AI can help you understand data, spot trends, and prepare vet visit questions, but all medical decisions should be made in consultation with a licensed veterinarian.</p>
+
+        <h3>Q: Can I track multiple pets?</h3>
+        <p>The free plan supports 1 pet. The Family plan (NT$120/mo) supports 2 pets. The Big Family plan (NT$350/mo) supports unlimited pets.</p>
+
+        <h3>Q: How do I cancel my subscription?</h3>
+        <p>Subscriptions are managed through the Apple App Store. Go to iPhone Settings > [Your Name] > Subscriptions > PawPeace > Cancel Subscription. You'll retain access until the current period ends.</p>
+
+        <h3>Q: My pet has passed away. Can I keep the records?</h3>
+        <p>Absolutely. You can set a "Rainbow Bridge date" on your pet's profile, and all records are permanently preserved in your account. You can also use the "AI Memorial" feature to create a tribute for your pet.</p>
+
+        <h3>Q: How do I delete my account?</h3>
+        <p>Go to "More" > "Settings" > "Delete Account." Once confirmed, all your data will be completely removed within 30 days and cannot be recovered.</p>
+
+        <h3>Q: What if I have problems?</h3>
+        <p>Please email us at <a href="mailto:pawpeace0225@gmail.com" style="color:var(--primary)">pawpeace0225@gmail.com</a> and we'll get back to you as soon as possible.</p>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">Terms of Service</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">Pricing</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">Refund Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI Disclaimer</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>

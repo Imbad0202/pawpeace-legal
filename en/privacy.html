@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — PawPeace</title>
+  <meta name="description" content="PawPeace Privacy Policy. Learn how we collect, use, share, and protect your personal information.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="alternate" hreflang="zh-TW" href="https://pawpeace.app/privacy" />
+  <link rel="alternate" hreflang="en" href="https://pawpeace.app/en/privacy" />
+  <link rel="alternate" hreflang="x-default" href="https://pawpeace.app/privacy" />
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-lang { font-size: 13px; color: var(--text-light); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
+    .nav-lang:hover { border-color: var(--primary); color: var(--primary); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    .content { position: relative; z-index: 1; }
+
+    .page-header { text-align: center; padding: 140px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .page-header h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-header .updated { font-size: 14px; color: var(--text-light); }
+
+    .legal { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+    .legal h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+    .legal h3 { font-size: 17px; font-weight: 700; color: var(--secondary); margin: 24px 0 10px; }
+    .legal p { font-size: 15px; margin-bottom: 12px; line-height: 1.8; }
+    .legal ul, .legal ol { margin: 8px 0 16px 20px; font-size: 15px; }
+    .legal li { margin-bottom: 6px; line-height: 1.7; }
+    .legal a { color: var(--primary); text-decoration: none; }
+    .legal a:hover { text-decoration: underline; }
+    .legal strong { color: var(--text); }
+    .legal table { width: 100%; border-collapse: collapse; margin: 16px 0; background: var(--white); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .legal th, .legal td { padding: 12px 14px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
+    .legal th { background: var(--secondary); color: var(--white); font-weight: 600; }
+    .legal tr:last-child td { border-bottom: none; }
+    .legal-note { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 120px 20px 48px; }
+      .legal table { font-size: 13px; }
+      .legal th, .legal td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">User Guide</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="../privacy.html" class="nav-lang">中文</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: March 1, 2026</p>
+    </div>
+
+    <div class="legal">
+
+      <p>PawPeace ("the Service," "we," "us," or "our") is developed and operated by the PawPeace Team. We are committed to protecting your privacy and personal information. This Privacy Policy describes how we collect, use, disclose, and safeguard your information when you use the PawPeace mobile application.</p>
+      <p>By downloading, installing, or using PawPeace, you consent to the practices described in this Privacy Policy. If you do not agree with these practices, please do not use the Service.</p>
+
+      <h2>1. Information We Collect</h2>
+
+      <h3>1.1 Information You Provide</h3>
+      <table>
+        <tr><th>Category</th><th>Data</th><th>Purpose</th></tr>
+        <tr><td>Account information</td><td>Email address, display name (optional)</td><td>Registration, login, account management</td></tr>
+        <tr><td>Third-party login</td><td>Apple ID or Google account authentication tokens</td><td>Identity verification</td></tr>
+        <tr><td>Pet information</td><td>Pet name, species, breed, birthday, weight, photos</td><td>Pet profile management</td></tr>
+        <tr><td>Care records</td><td>Daily quality-of-life scores, notes, mood tags</td><td>QoL tracking</td></tr>
+        <tr><td>Medication records</td><td>Drug names, dosages, frequencies, administration logs</td><td>Medication management & reminders</td></tr>
+        <tr><td>Medical records</td><td>Blood test reports (lab values, report photos), vet visit records</td><td>Health tracking & AI analysis</td></tr>
+        <tr><td>Expense records</td><td>Medical expenses (optional)</td><td>Expense statistics</td></tr>
+        <tr><td>Media files</td><td>Photos, voice memos, journal text</td><td>Memory recording</td></tr>
+      </table>
+
+      <h3>1.2 Automatically Collected Information</h3>
+      <p>We automatically collect limited device information including device type and operating system version for compatibility and troubleshooting purposes. We do <strong>not</strong> collect IP addresses, location data, or browsing history.</p>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li><strong>Providing core features</strong>: Care records, medication management, QoL tracking, vet visit records, expense tracking</li>
+        <li><strong>AI care features</strong>: Transmitting pet care data (QoL scores, weight, medication records, lab values, etc.) to AI services for analysis. <strong>No personally identifiable owner information is ever transmitted to AI.</strong></li>
+        <li><strong>Push notifications</strong>: Medication reminders, journal reminders, vet visit reminders (you can disable these at any time)</li>
+        <li><strong>Service improvement</strong>: Analyzing anonymized usage data to optimize features and user experience</li>
+      </ul>
+      <p>We will <strong>never</strong> sell your personal information to third parties. We do not use your data for advertising or marketing profiling.</p>
+
+      <h2>3. Third-Party Services & Data Transfers</h2>
+      <p>To provide the Service, we use the following third-party services. Your data may be processed outside your country of residence:</p>
+
+      <h3>3.1 Supabase (United States)</h3>
+      <ul>
+        <li>Purpose: Database storage, user authentication, file storage</li>
+        <li>Data transferred: Account data, pet care records, media files</li>
+        <li>Storage: Amazon Web Services (AWS) cloud servers</li>
+        <li>Security: Transport encryption, Row Level Security (RLS)</li>
+        <li>Privacy policy: <a href="https://supabase.com/privacy">https://supabase.com/privacy</a></li>
+      </ul>
+
+      <h3>3.2 Anthropic Claude AI (United States)</h3>
+      <ul>
+        <li>Purpose: 8 AI care features (symptom assessment, drug interaction check, weekly report, dietary suggestions, vet visit helper, journal assistant, emotional companion, memorial text) plus blood test analysis and OCR</li>
+        <li>Data transferred: <strong>Pet care data only</strong> (QoL scores, weight trends, medication lists, lab values, species, diagnoses) -- no owner names, emails, or other personally identifiable information</li>
+        <li>Data processing: Real-time processing only; data is not stored and cannot be traced back to an individual</li>
+        <li>Privacy policy: <a href="https://www.anthropic.com/privacy">https://www.anthropic.com/privacy</a></li>
+      </ul>
+
+      <h3>3.3 Apple Sign In / Google Sign In</h3>
+      <ul>
+        <li>Purpose: Third-party identity verification</li>
+        <li>Data transferred: Only authentication tokens; we do not access your contacts, photos, or other data</li>
+      </ul>
+
+      <h3>3.4 RevenueCat (United States)</h3>
+      <ul>
+        <li>Purpose: In-app purchase and subscription management</li>
+        <li>Data transferred: Anonymous user ID (UUID), purchase history, subscription status</li>
+        <li>No personally identifiable information (name, email, etc.) is transmitted</li>
+        <li>Privacy policy: <a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></li>
+      </ul>
+
+      <h2>4. AI Care Features Disclaimer</h2>
+      <p>PawPeace provides AI-powered care features using artificial intelligence technology. Before using these features, please understand:</p>
+      <ul>
+        <li><strong>Not medical practice</strong>: All AI outputs are for informational purposes only and do not constitute veterinary diagnosis, medical advice, or treatment recommendations. They cannot replace the professional judgment of a licensed veterinarian.</li>
+        <li><strong>Accuracy limitations</strong>: AI analysis may be inaccurate due to incomplete data, input errors, species variations, or other factors.</li>
+        <li><strong>Consult your vet</strong>: All health-related concerns or decisions should be discussed with a qualified veterinarian.</li>
+        <li><strong>Emotional support is not therapy</strong>: The AI emotional companion provides general support, not professional counseling or mental health treatment.</li>
+        <li><strong>Limitation of liability</strong>: We are not liable for any damages resulting from reliance on AI feature outputs.</li>
+      </ul>
+      <p>Every AI analysis result includes the disclaimer: "This analysis is for informational purposes only and cannot replace the professional judgment of a licensed veterinarian."</p>
+
+      <h2>5. Data Security</h2>
+      <p>We implement the following measures to protect your personal information:</p>
+      <ul>
+        <li>All data transmission uses HTTPS/TLS encryption</li>
+        <li>Database employs Row Level Security (RLS), ensuring users can only access their own data</li>
+        <li>AI analysis is processed through server-side Edge Functions; API keys are never exposed to the client</li>
+        <li>Sensitive information (e.g., auth tokens) is stored using device Secure Store</li>
+        <li>Passwords are hashed; we cannot read your original password</li>
+      </ul>
+
+      <h2>6. Data Retention</h2>
+      <ul>
+        <li><strong>While your account is active</strong>: Your data is retained until you choose to delete your account</li>
+        <li><strong>After account deletion</strong>: All personal data, pet records, media files, and AI analysis caches are permanently and irreversibly deleted within <strong>30 days</strong></li>
+        <li><strong>Anonymized statistics</strong>: De-identified aggregate data may be retained for service improvement</li>
+      </ul>
+
+      <h2>7. Your Privacy Rights</h2>
+
+      <h3>7.1 Rights for All Users</h3>
+      <p>Regardless of your location, you have the right to:</p>
+      <ul>
+        <li><strong>Access</strong>: View all your data within the app at any time</li>
+        <li><strong>Correction</strong>: Edit your data within the app at any time</li>
+        <li><strong>Deletion</strong>: Delete your account via Settings in the app, or contact us for assistance</li>
+        <li><strong>Data portability</strong>: Contact us to request a copy of your personal data</li>
+        <li><strong>Opt-out</strong>: Disable push notifications at any time</li>
+      </ul>
+
+      <h3>7.2 California Residents (CCPA/CPRA)</h3>
+      <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA) and the California Privacy Rights Act (CPRA):</p>
+      <ul>
+        <li><strong>Right to know</strong>: You may request details about the categories and specific pieces of personal information we have collected about you</li>
+        <li><strong>Right to delete</strong>: You may request deletion of your personal information, subject to certain exceptions</li>
+        <li><strong>Right to non-discrimination</strong>: We will not discriminate against you for exercising your privacy rights</li>
+        <li><strong>No sale of personal information</strong>: We do not sell your personal information and have not done so in the preceding 12 months</li>
+        <li><strong>No sharing for cross-context behavioral advertising</strong>: We do not share your personal information for cross-context behavioral advertising</li>
+      </ul>
+      <p>To exercise your CCPA/CPRA rights, contact us at <a href="mailto:pawpeace0225@gmail.com">pawpeace0225@gmail.com</a>. We will respond within 45 days.</p>
+
+      <h3>7.3 European Economic Area Residents (GDPR)</h3>
+      <p>If you are located in the European Economic Area (EEA), United Kingdom, or Switzerland, you have additional rights under the General Data Protection Regulation (GDPR):</p>
+      <ul>
+        <li><strong>Legal basis</strong>: We process your data based on your consent (provided when you create an account) and legitimate interest (service improvement)</li>
+        <li><strong>Right to withdraw consent</strong>: You may withdraw consent at any time by deleting your account</li>
+        <li><strong>Right to restriction</strong>: You may request restriction of processing in certain circumstances</li>
+        <li><strong>Right to object</strong>: You may object to processing based on legitimate interest</li>
+        <li><strong>Data Protection Authority</strong>: You have the right to lodge a complaint with your local data protection authority</li>
+      </ul>
+      <p>International data transfers are conducted under standard contractual clauses or equivalent safeguards as required by GDPR.</p>
+
+      <h2>8. Cookies & Tracking Technologies</h2>
+      <p>PawPeace is a native mobile application and does not use web cookies. The app does not embed any third-party advertising tracking SDKs and does not perform cross-app tracking. We comply with Apple's App Tracking Transparency (ATT) framework.</p>
+
+      <h2>9. Children's Privacy</h2>
+      <p>PawPeace is not directed at children under 13 years of age, and we do not knowingly collect personal information from children under 13 in compliance with the Children's Online Privacy Protection Act (COPPA). If we learn that we have inadvertently collected personal information from a child under 13, we will promptly delete it. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+
+      <h2>10. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable law. The revised policy will be posted on this page with an updated "Last updated" date. If material changes are made, we will notify you via in-app notification or email. We encourage you to review this policy periodically.</p>
+
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy or wish to exercise your privacy rights, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:pawpeace0225@gmail.com">pawpeace0225@gmail.com</a></li>
+        <li>Developer: PawPeace Team</li>
+      </ul>
+      <p>We will respond to all privacy-related requests within 30 days (or 45 days for CCPA requests).</p>
+
+      <p class="legal-note">This Privacy Policy is governed by the laws of the State of California, United States, without regard to conflict of law principles.</p>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">Terms of Service</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">Pricing</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">Refund Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI Disclaimer</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>

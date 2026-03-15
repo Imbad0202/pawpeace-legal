@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Medical Disclaimer — PawPeace</title>
+  <meta name="description" content="PawPeace AI Medical Disclaimer. Understand the nature, limitations, and data handling practices of our AI analysis features.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+  <link rel="alternate" hreflang="zh-TW" href="https://pawpeace.app/disclaimer" />
+  <link rel="alternate" hreflang="en" href="https://pawpeace.app/en/disclaimer" />
+  <link rel="alternate" hreflang="x-default" href="https://pawpeace.app/disclaimer" />
+  <style>
+    :root {
+      --bg: #FFF8F0;
+      --primary: #E8A87C;
+      --primary-dark: #D4956A;
+      --primary-light: #F5D5BF;
+      --secondary: #85B79D;
+      --secondary-dark: #6FA088;
+      --accent: #C97B84;
+      --text: #4A4A4A;
+      --text-light: #8A8A8A;
+      --white: #FFFFFF;
+      --border: #F0E8DF;
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
+    }
+
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(160px); z-index: 0; pointer-events: none; }
+    .bg-orb-1 { width: 600px; height: 600px; background: rgba(232,168,124,0.12); top: -200px; right: -200px; animation: orb1 25s ease-in-out infinite; }
+    .bg-orb-2 { width: 500px; height: 500px; background: rgba(133,183,157,0.10); bottom: -100px; left: -200px; animation: orb2 30s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-40px,30px)} 66%{transform:translate(25px,-20px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(30px,-40px)} 66%{transform:translate(-20px,25px)} }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
+    .nav-logo-icon { font-size: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { background: var(--primary); color: var(--white)!important; padding: 8px 20px; border-radius: 20px; font-size: 14px!important; transition: background 0.2s, transform 0.2s!important; }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .nav-lang { font-size: 13px; color: var(--text-light); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
+    .nav-lang:hover { border-color: var(--primary); color: var(--primary); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); padding: 4px; }
+
+    .content { position: relative; z-index: 1; }
+
+    .page-header { text-align: center; padding: 140px 24px 60px; max-width: 720px; margin: 0 auto; }
+    .page-header h1 { font-size: clamp(32px, 6vw, 48px); font-weight: 800; color: var(--text); margin-bottom: 12px; }
+    .page-header .updated { font-size: 14px; color: var(--text-light); }
+
+    .legal { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
+    .legal h2 { font-size: 22px; font-weight: 700; color: var(--primary); margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+    .legal h3 { font-size: 17px; font-weight: 700; color: var(--secondary); margin: 24px 0 10px; }
+    .legal p { font-size: 15px; margin-bottom: 12px; line-height: 1.8; }
+    .legal ul, .legal ol { margin: 8px 0 16px 20px; font-size: 15px; }
+    .legal li { margin-bottom: 6px; line-height: 1.7; }
+    .legal a { color: var(--primary); text-decoration: none; }
+    .legal a:hover { text-decoration: underline; }
+    .legal strong { color: var(--text); }
+
+    .disclaimer-banner {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      color: var(--white); border-radius: var(--radius);
+      padding: 28px 32px; margin-bottom: 32px; text-align: center; box-shadow: var(--shadow-md);
+    }
+    .disclaimer-banner p { color: var(--white); font-size: 16px; font-weight: 600; margin-bottom: 0; line-height: 1.6; }
+
+    .ai-function-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 24px; list-style: none; }
+    .ai-function-list li { background: var(--white); border-radius: var(--radius-sm); padding: 14px 16px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 10px; margin-bottom: 0; }
+    .ai-function-list .fn-emoji { font-size: 22px; flex-shrink: 0; }
+    .ai-function-list .fn-text { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    .highlight-box { background: var(--white); border-left: 4px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 20px 24px; margin: 20px 0; box-shadow: var(--shadow-sm); }
+    .highlight-box p { margin-bottom: 8px; }
+    .highlight-box p:last-child { margin-bottom: 0; }
+    .highlight-box strong { color: var(--accent); }
+
+    .data-flow { background: var(--white); border-radius: var(--radius); padding: 28px; margin: 20px 0; box-shadow: var(--shadow-sm); }
+    .data-flow h4 { font-size: 16px; font-weight: 700; color: var(--secondary); margin-bottom: 16px; }
+    .flow-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .flow-step:last-child { margin-bottom: 0; }
+    .flow-num { width: 28px; height: 28px; border-radius: 50%; background: var(--secondary); color: var(--white); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .flow-step p { margin-bottom: 0; font-size: 14px; }
+
+    .legal-note { text-align: center; font-size: 12px; color: var(--text-light); margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    .footer-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text-light); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-divider { color: var(--border); font-size: 14px; }
+    .footer-copy { font-size: 12px; color: var(--text-light); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--primary); color: var(--white);
+      border: none; cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(232,168,124,0.3);
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s ease; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(255,248,240,0.96); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        flex-direction: column; padding: 16px 24px; gap: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .page-header { padding: 120px 20px 48px; }
+      .ai-function-list { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo"><span class="nav-logo-icon">🐾</span><span>PawPeace</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="manual.html">User Guide</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="../disclaimer.html" class="nav-lang">中文</a></li>
+      <li><a href="https://apps.apple.com/app/id6759600902" target="_blank" rel="noopener" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <div class="page-header">
+      <h1>AI Medical Disclaimer</h1>
+      <p class="updated">Last updated: March 1, 2026</p>
+    </div>
+
+    <div class="legal">
+
+      <div class="disclaimer-banner">
+        <p>This analysis is for informational purposes only and cannot replace<br>the professional judgment of a licensed veterinarian.</p>
+      </div>
+
+      <p>PawPeace integrates multiple artificial intelligence (AI) features designed to assist pet owners in recording, understanding, and managing their pet's care information. Please read and understand the following disclaimer before using any AI feature.</p>
+
+      <h2>1. Scope of AI Features</h2>
+      <p>PawPeace currently provides the following AI-assisted features:</p>
+
+      <ul class="ai-function-list">
+        <li><span class="fn-emoji">🔬</span><span class="fn-text">AI Blood Test Analysis</span></li>
+        <li><span class="fn-emoji">🩺</span><span class="fn-text">AI Symptom Assessment</span></li>
+        <li><span class="fn-emoji">💊</span><span class="fn-text">AI Drug Interaction Check</span></li>
+        <li><span class="fn-emoji">📋</span><span class="fn-text">AI Weekly Care Report</span></li>
+        <li><span class="fn-emoji">🥗</span><span class="fn-text">AI Dietary Suggestions</span></li>
+        <li><span class="fn-emoji">🏥</span><span class="fn-text">AI Vet Visit Helper</span></li>
+        <li><span class="fn-emoji">✨</span><span class="fn-text">AI Journal Assistant</span></li>
+        <li><span class="fn-emoji">💛</span><span class="fn-text">AI Emotional Companion</span></li>
+        <li><span class="fn-emoji">🕊️</span><span class="fn-text">AI Memorial Text Generator</span></li>
+        <li><span class="fn-emoji">📸</span><span class="fn-text">OCR Report Text Recognition</span></li>
+      </ul>
+
+      <h2>2. AI Analysis is for Reference Only</h2>
+
+      <div class="highlight-box">
+        <p><strong>Core Statement:</strong> All analysis results, suggestions, descriptions, and other content produced by PawPeace's AI features are provided <strong>for informational purposes only</strong>. They do not constitute and should not be considered veterinary diagnoses, medical advice, treatment plans, drug prescriptions, or any form of professional medical opinion.</p>
+      </div>
+
+      <p>Specifically:</p>
+      <ul>
+        <li><strong>AI Blood Test Analysis</strong> provides general interpretations and observation notes on test values -- it is not a formal clinical laboratory interpretation. Reference ranges may vary by laboratory, and AI baselines may differ from your veterinarian's.</li>
+        <li><strong>AI Symptom Assessment</strong> offers care observation suggestions based on your QoL scores and notes -- it is not a disease diagnosis. Symptom severity and significance require clinical judgment by a veterinarian.</li>
+        <li><strong>AI Drug Interaction Check</strong> provides general drug interaction reference information. It does not cover all possible interactions and does not account for your pet's individual condition, organ function, or other factors.</li>
+        <li><strong>AI Dietary Suggestions</strong> offer nutritional direction references -- they are not disease-specific medical diet prescriptions.</li>
+        <li><strong>AI Emotional Companion</strong> provides general emotional support -- it does not constitute psychological counseling or therapy.</li>
+      </ul>
+
+      <h2>3. Not a Substitute for Veterinary Care</h2>
+      <p>PawPeace and its AI features:</p>
+      <ul>
+        <li>Do not provide disease diagnoses</li>
+        <li>Do not prescribe medications</li>
+        <li>Do not provide treatment plans</li>
+        <li>Do not replace clinical examination and professional judgment by a licensed veterinarian</li>
+        <li>Do not establish a veterinarian-client-patient relationship</li>
+      </ul>
+      <p>Any concerns or decisions about your pet's health -- including but not limited to starting, adjusting, or stopping medications, changing diets, selecting treatment options, and hospice care decisions -- should be made in consultation with a qualified veterinarian.</p>
+
+      <h2>4. Consult a Professional Veterinarian</h2>
+      <p>We strongly recommend consulting your veterinarian in the following situations:</p>
+      <ul>
+        <li>After receiving AI analysis results, if you have any questions or concerns</li>
+        <li>Your pet develops new symptoms or existing symptoms worsen</li>
+        <li>When considering medication or dietary changes</li>
+        <li>When QoL scores show a notable declining trend</li>
+        <li>When making significant care decisions</li>
+        <li>In any emergency situation (seek immediate veterinary care -- do not wait for AI analysis)</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Emergency:</strong> If your pet is experiencing breathing difficulty, significant bleeding, loss of consciousness, severe vomiting or diarrhea, or suspected poisoning, bring them to the nearest emergency animal hospital <strong>immediately</strong>. Do not use AI features to assess emergencies.</p>
+      </div>
+
+      <h2>5. Data Handling Practices</h2>
+      <p>To protect your privacy, PawPeace's AI features follow these data handling principles:</p>
+
+      <h3>5.1 Data Sent to AI</h3>
+      <p>During AI analysis, <strong>only pet care-related data</strong> is transmitted, including:</p>
+      <ul>
+        <li>Pet species, breed, age, weight</li>
+        <li>QoL scores and trend data</li>
+        <li>Lab test values (blood test numbers)</li>
+        <li>Current medication list (drug names, dosages)</li>
+        <li>Diagnosis information (e.g., kidney disease, tumor)</li>
+        <li>Care notes text</li>
+      </ul>
+
+      <h3>5.2 Data Never Sent</h3>
+      <p>The following data is <strong>never transmitted</strong> to the AI service:</p>
+      <ul>
+        <li>Owner's name, email, or other personally identifiable information</li>
+        <li>Account ID or login credentials</li>
+        <li>Phone number, address, or other contact information</li>
+        <li>Payment or credit card information</li>
+      </ul>
+
+      <div class="data-flow">
+        <h4>AI Data Processing Flow</h4>
+        <div class="flow-step">
+          <span class="flow-num">1</span>
+          <p>You enter care data or upload a report in the app</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">2</span>
+          <p>The app sends care data (without personal identifiers) via encrypted connection to Supabase Edge Function</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">3</span>
+          <p>The Edge Function sends de-identified care data to Anthropic Claude AI for analysis</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">4</span>
+          <p>AI returns analysis results to the Edge Function</p>
+        </div>
+        <div class="flow-step">
+          <span class="flow-num">5</span>
+          <p>Results are sent back to the app for display, with the option to save to your account</p>
+        </div>
+      </div>
+
+      <h3>5.3 AI Service Provider</h3>
+      <p>PawPeace uses Anthropic's Claude AI models for analysis. Anthropic's data processing policy states that data sent via API is not used for model training. See <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a> for details.</p>
+
+      <h2>6. AI Model Limitations</h2>
+      <p>Please be aware that AI models have the following inherent limitations:</p>
+      <ul>
+        <li><strong>Knowledge cutoff</strong>: AI models have a training data time limit and may not include the latest veterinary research or drug information.</li>
+        <li><strong>Accuracy</strong>: AI may produce inaccurate, incomplete, or outdated information. Even when stated with confidence, AI content may be incorrect.</li>
+        <li><strong>Individual variation</strong>: AI cannot perform clinical examinations like a veterinarian -- it cannot palpate, auscultate, or observe your pet's actual condition. AI analysis is based on text and data, lacking the comprehensiveness of clinical assessment.</li>
+        <li><strong>Species differences</strong>: Normal reference values, drug responses, and nutritional needs can vary significantly between species (dogs, cats, etc.). AI may not fully account for all species differences.</li>
+        <li><strong>Context limitations</strong>: AI can only analyze based on the data you provide. It does not know your pet's complete medical history, environmental factors, or other health-influencing factors.</li>
+        <li><strong>Hallucination</strong>: AI models may sometimes produce information that appears plausible but is factually incorrect (known as "hallucination"). This is a known limitation of current AI technology.</li>
+      </ul>
+
+      <h2>7. Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law:</p>
+      <ul>
+        <li>The PawPeace team shall not be liable for any direct, indirect, incidental, special, punitive, or consequential damages arising from the use of or reliance on AI feature analysis results.</li>
+        <li>The PawPeace team makes no warranties regarding the accuracy, completeness, timeliness, or fitness for a particular purpose of AI analysis results.</li>
+        <li>Use of AI features is at your own risk.</li>
+        <li>This disclaimer does not affect your statutory consumer rights under applicable law.</li>
+      </ul>
+
+      <h2>8. Emotional Support Feature Notice</h2>
+      <p>PawPeace's "AI Emotional Companion" feature is designed to provide general emotional support and companionship. Please note:</p>
+      <ul>
+        <li>This feature does not constitute psychological counseling, psychotherapy, or mental health services</li>
+        <li>AI is not a licensed therapist or counselor</li>
+        <li>If you are experiencing severe grief, anxiety, depression, or other emotional distress, please seek professional help</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Need help?</strong></p>
+        <p><strong>988 Suicide & Crisis Lifeline</strong>: Call or text 988 (US, 24/7)</p>
+        <p><strong>Crisis Text Line</strong>: Text HOME to 741741 (US)</p>
+        <p><strong>ASPCA Pet Loss Hotline</strong>: (877) 474-3310</p>
+      </div>
+
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions about this disclaimer or encounter issues while using AI features, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:pawpeace0225@gmail.com">pawpeace0225@gmail.com</a></li>
+        <li>Developer: PawPeace Team</li>
+      </ul>
+
+      <p class="legal-note">This disclaimer is governed by the laws of the State of California, United States. For disputes, the parties agree to submit to the jurisdiction of the courts located in San Francisco County, California.</p>
+
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">Terms of Service</a>
+        <span class="footer-divider">|</span>
+        <a href="pricing.html">Pricing</a>
+        <span class="footer-divider">|</span>
+        <a href="refund.html">Refund Policy</a>
+        <span class="footer-divider">|</span>
+        <a href="disclaimer.html">AI Disclaimer</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 PawPeace. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.textContent = '☰'; });
+    });
+  </script>
+</body>
+</html>
