@@ -49,7 +49,7 @@
     }
     nav.scrolled { background: rgba(255,248,240,0.88); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--border); }
     .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 18px; }
-    .nav-logo-icon { font-size: 24px; }
+    .nav-logo-img { width: 32px; height: 32px; border-radius: 8px; }
     .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--primary); }
@@ -311,7 +311,7 @@
     .feature-icon .icon, .everything-emoji .icon, .fn-emoji .icon { width: 40px; height: 40px; color: var(--primary); }
     .everything-emoji .icon { width: 28px; height: 28px; }
     .fn-emoji .icon { width: 20px; height: 20px; }
-    .nav-logo-icon .icon { width: 24px; height: 24px; }
+    .nav-logo-img { width: 28px; height: 28px; border-radius: 6px; }
     .step-number .icon { width: 24px; height: 24px; }
     .toc-num .icon { width: 14px; height: 14px; }
   </style>
@@ -323,7 +323,7 @@
   <div class="bg-orb bg-orb-2"></div>
 
   <nav id="nav">
-    <a href="index.html" class="nav-logo"><span class="nav-logo-icon"><i data-lucide="paw-print" class="icon"></i></span><span>GentleMao</span></a>
+    <a href="index.html" class="nav-logo"><img src="icon.png" alt="GentleMao" class="nav-logo-img"><span>GentleMao</span></a>
     <button class="nav-toggle" id="navToggle" aria-label="選單">☰</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="manual.html">使用手冊</a></li>
